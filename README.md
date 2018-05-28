@@ -1,2 +1,2 @@
 # GameOfLife
-a game of life project in Java FX
+A game of life project in Java FX
