@@ -1,3 +1,7 @@
-org\utbm\gameoflife\FXMLController.class
+org\utbm\gameoflife\Position.class
 org\utbm\gameoflife\FenetreApplication.class
+org\utbm\gameoflife\FXMLController.class
+org\utbm\gameoflife\Grid2D.class
+org\utbm\gameoflife\StartMain.class
+org\utbm\gameoflife\Cell.class
 org\utbm\gameoflife\MainApp.class

@@ -44,8 +44,8 @@ public class FenetreApplication extends Application {
  
         /**lancement de l'application*/
         public void start(Stage primaryStage) {
-           taillex = 60;
-           tailley = 60;
+           taillex = 50;
+           tailley = 50;
            tempo = 60;
            espace = 16;
            densite = 0.5;
@@ -69,7 +69,7 @@ public class FenetreApplication extends Application {
            initMatrice(densite);
            copie(matrice, matriceCopie);
  
-           //definir les acteurs (representation des cellules
+           //definir les acteurs (representation des cellules)
            circles = new Circle[taillex][tailley];
            creationTroupe( root);           
  
