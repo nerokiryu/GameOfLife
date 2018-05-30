@@ -1,4 +1,4 @@
-package org.utbm.gameoflife;
+package org.utbm.gameoflife.exemple;
 
 import java.net.URL;
 import java.util.ResourceBundle;

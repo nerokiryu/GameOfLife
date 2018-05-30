@@ -14,19 +14,19 @@ import java.util.Map;
 public class Grid2D {
     private int sizeX;
     private int sizeY;
-    private Cell[][] cells;
+    private Cell2D[][] cells;
     public Grid2D(int sizeX, int sizeY) {
         this.sizeX = sizeX;
         this.sizeY = sizeY;
-        this.cells = new Cell[sizeX][sizeY];
+        this.cells = new Cell2D[sizeX][sizeY];
         initGrid2D();
         setVoisins();
     }
-    public Cell getCell(int x, int y) {
+    public Cell2D getCell(int x, int y) {
         return cells[x][y];
     }
 
-    public Cell[][] getCells() {
+    public Cell2D[][] getCells() {
         return cells;
     }
 
@@ -48,7 +48,7 @@ public class Grid2D {
     private void initGrid2D(){
         for (int i = 0; i < sizeX; i++)
             for (int j = 0; j < sizeY; j++)
-                cells[i][j] = new Cell(0,i,j);
+                cells[i][j] = new Cell2D(0,i,j);
     }
     public void setVoisins(){
         for (int i = 0; i < sizeX; i++){

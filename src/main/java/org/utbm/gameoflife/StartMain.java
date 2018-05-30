@@ -30,7 +30,9 @@ public class StartMain extends Application{
     private int tailleX,tailleY;
     /**densite de cellules actives au départ*/
     double densite;
- 
+    /**nb de cycles d'execution**/
+    int nbCycle = Timeline.INDEFINITE;
+    String typeJeu;
     /**délai en ms entre chaque évolution*/
     private int tempo;    
     
@@ -41,9 +43,12 @@ public class StartMain extends Application{
         tempo = 60;
         sizeCell = 16;
         densite = 0.5;
-        construireScenePourJeuDeLaVie(primaryStage);
+        //snbCycle = 50;
+        typeJeu = "JeuDeLaVie";
+        construireSceneJeu(primaryStage);
+
     }
-    void construireScenePourJeuDeLaVie(Stage primaryStage)  
+    void construireSceneJeu(Stage primaryStage)  
         {
            int largeur = (tailleX+1) * (sizeCell+1);
            int hauteur = (tailleY+1) * (sizeCell+1);
@@ -51,16 +56,16 @@ public class StartMain extends Application{
            Group root = new Group();
            //definir la scene principale
            Scene scene = new Scene(root, largeur, hauteur, Color.BLACK);
-           primaryStage.setTitle("Life...");
+           primaryStage.setTitle("Jeux");
            primaryStage.setScene(scene);
            //creation et initialisation des cellules
            grid = new Grid2D(tailleX,tailleY);
            
-           initMatrice(densite);
+           initMatrice2D(densite);
  
            //definir les acteurs (representation des cellules)
            circles = new Circle[tailleX][tailleY];
-           creationVisuel( root);           
+           creationVisuel2D( root);           
  
            //afficher le theatre
            primaryStage.show();
@@ -69,11 +74,15 @@ public class StartMain extends Application{
            //-----lancer le timer pour faire vivre la matrice
            Timeline littleCycle = new Timeline(new KeyFrame(Duration.millis(tempo), 
                       event-> {
-                               //à chaque top, lancer une evolution
-                                    evoluerMatrice();
+                            //à chaque top, lancer une evolution du jeu de la vie
+                            if(typeJeu =="JeuDeLaVie")
+                                JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
+                            else
+                                JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
+                                   
                           } ));
            //animation en boucle
-           littleCycle.setCycleCount(Timeline.INDEFINITE);
+           littleCycle.setCycleCount(nbCycle);
            littleCycle.play();
         }
     /**
@@ -81,7 +90,7 @@ public class StartMain extends Application{
      * @param densite
      *  initialisation de la matrice
      */
-        void initMatrice(double densite)
+        void initMatrice2D(double densite)
         {
              for(int i=0; i<tailleX; i++)
                   for(int j=0; j<tailleY; j++)
@@ -93,51 +102,19 @@ public class StartMain extends Application{
          *creation des cercles et de leurs couleurs en fonction de l'etat de leur cellule (cellule située aux même coordonnées (i,j))
          *@param root ensemble des acteurs de la scène dans lequel les cercles seront ajoutés
          */
-        void creationVisuel(Group root)
+        void creationVisuel2D(Group root)
         {
            for(int i=0; i<tailleX; i++)
               for(int j=0; j<tailleY; j++)
               {
                  circles[i][j] = new Circle((i+1)*(sizeCell+1), (j+1)*(sizeCell+1), sizeCell/2);
-                 if (grid.getCell(i,j).getEtat()!=0) circles[i][j].setFill(Color.ANTIQUEWHITE);//grid.getCell(i,j).getEtat()
-                 else circles[i][j].setFill(Color.DARKSLATEGRAY);
+                 if (grid.getCell(i,j).getEtat()>=0) circles[i][j].setFill(Couleur.getValeurByInt(grid.getCell(i,j).getEtat()));
                  root.getChildren().add(circles[i][j]);
               }
         }
-        
-         /** 
-         *evolution de l'ensemble de la matrice
-         */
-        void evoluerMatrice()
-        {
-            for(int x=0; x<tailleX; x++)
-                 for(int y=0; y<tailleY; y++)
-                      evoluer(x,y);   
-        }
-        
+                
         /**
-         * 
-         * @param x coordonnée en x de la céllule
-         * @param y coordonnée en y de la céllule
-         * logique de céllule unique
-         */
-        void evoluer(int x, int y)
-        {
-            int nbVoisinesActives = grid.getCell(x, y).nbVoisinsEtat(1);
-             if(grid.getCell(x, y).getEtat()==1)
-             {
-                  if(nbVoisinesActives > 3 || nbVoisinesActives < 2) 
-                       {grid.getCell(x, y).setEtat(0); circles[x][y].setFill(Color.DARKSLATEGRAY);}
-             }
-             else
-             {
-                  if(nbVoisinesActives == 3) 
-                       {grid.getCell(x, y).setEtat(1); circles[x][y].setFill(Color.ANTIQUEWHITE);}
-             }
-        }
-        
-        /**
-         * lancement du pro
+         * lancement du programme
          * @param args argument de lancement du programme
         */
         public static void main(String[] args) {

@@ -11,18 +11,18 @@ import javafx.scene.paint.Color;
  *
  * @author Nero
  */
-public class Cell {
+public class Cell2D {
     private int etat = 0;
-    public Cell[] voisins;
+    public Cell2D[] voisins;
     private Position pos;
-    Cell(int etat){
+    Cell2D(int etat){
         setEtat(etat);
-        this.voisins = new Cell[8];
+        this.voisins = new Cell2D[8];
     }
-    Cell(int etat, int x,int y){
+    Cell2D(int etat, int x,int y){
         setEtat(etat);
         setPosition(x,y);
-        this.voisins = new Cell[8];
+        this.voisins = new Cell2D[8];
     }
     public int getEtat(){
         return etat;
@@ -36,33 +36,15 @@ public class Cell {
     public void setPosition(int x,int y){
         this.pos = new Position(x,y);
     }
-    public Cell[] getVoisins(){
+    public Cell2D[] getVoisins(){
         return voisins;
     }
     public int nbVoisinsEtat(int etat){
         int res=0;
-        for(Cell item : this.getVoisins())
+        for(Cell2D item : this.getVoisins())
             if(item != null && item.etat == etat)
                 res++;
         return res;
-    }
-    public void Draw()
-    {
-        switch (getEtat()){
-            case 0:
-              //spriteBatch.Draw(Game1.Pixel, Bounds, Color.BLACK);
-              break;
-            case 1:
-              //spriteBatch.Draw(Game1.Pixel, Bounds, Color.BLUE);
-              break;
-            case 2:
-              //spriteBatch.Draw(Game1.Pixel, Bounds, Color.RED);
-              break;
-            default:
-              //spriteBatch.Draw(Game1.Pixel, Bounds, Color.WHITE);
-    }
-            
+    }       
  
-        // Don't draw anything if it's dead, since the default background color is white.
-    }
 }
