@@ -40,11 +40,12 @@ public class StartMain extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         tailleX=tailleY=40;
-        tempo = 60;
+        tempo = 1000;
         sizeCell = 16;
         densite = 0.5;
         //snbCycle = 50;
-        typeJeu = "JeuDeLaVie";
+        //typeJeu = "JeuDeLaVie";
+        typeJeu = "feuforet";
         construireSceneJeu(primaryStage);
         
     }
@@ -64,6 +65,8 @@ public class StartMain extends Application{
         
         if(typeJeu =="JeuDeLaVie")
             JeuDeLaVie.initMatrice2D(tailleX, tailleY, grid, densite);
+        else if(typeJeu == "feuforet")
+            JeuSimulationFeuForet.initMatrice2D(tailleX, tailleY, grid, densite);
         else
             JeuDeLaVie.initMatrice2D(tailleX, tailleY, grid, densite);
         //definir les acteurs (representation des cellules)
@@ -77,9 +80,12 @@ public class StartMain extends Application{
         //-----lancer le timer pour faire vivre la matrice
         Timeline littleCycle = new Timeline(new KeyFrame(Duration.millis(tempo),
                 event-> {
+                    
                     //à chaque top, lancer une evolution du jeu de la vie
                     if(typeJeu =="JeuDeLaVie")
                         JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
+                    else if(typeJeu == "feuforet")
+                        JeuSimulationFeuForet.evoluerMatrice(tailleX, tailleY, grid, circles);
                     else
                         JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
                     
