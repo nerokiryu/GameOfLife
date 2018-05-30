@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 
 package org.utbm.gameoflife;
 import java.util.Map;
@@ -45,6 +45,6 @@ public class Cell2D {
             if(item != null && item.etat == etat)
                 res++;
         return res;
-    }       
- 
+    }
+    
 }

@@ -1,11 +1,9 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package org.utbm.gameoflife;
-
-import java.util.Map;
 
 /**
  *
@@ -25,23 +23,23 @@ public class Grid2D {
     public Cell2D getCell(int x, int y) {
         return cells[x][y];
     }
-
+    
     public Cell2D[][] getCells() {
         return cells;
     }
-
+    
     public int getSizeX() {
         return sizeX;
     }
-
+    
     public void setSizeX(int sizeX) {
         this.sizeX = sizeX;
     }
-
+    
     public int getSizeY() {
         return sizeY;
     }
-
+    
     public void setSizeY(int sizeY) {
         this.sizeY = sizeY;
     }
@@ -60,7 +58,7 @@ public class Grid2D {
                 if(i < sizeX && j+1< sizeY && i >= 0 && j+1 >= 0 && cells[i][j+1] !=null)
                     cells[i][j].getVoisins()[2]=cells[i][j+1];//e
                 if(i-1 < sizeX && j+1< sizeY && i-1 >= 0 && j+1 >= 0 && cells[i-1][j+1] !=null)
-                    cells[i][j].getVoisins()[3]=cells[i-1][j+1];//se                
+                    cells[i][j].getVoisins()[3]=cells[i-1][j+1];//se
                 if(i-1 < sizeX && j< sizeY && i-1 >= 0 && j >= 0 && cells[i-1][j] !=null)
                     cells[i][j].getVoisins()[4]=cells[i-1][j];
                 if(i-1 < sizeX && j-1< sizeY && i-1 >= 0 && j-1 >= 0 && cells[i-1][j-1] !=null)
@@ -69,9 +67,9 @@ public class Grid2D {
                     cells[i][j].getVoisins()[6]=cells[i][j-1];
                 if(i+1 < sizeX && j-1< sizeY && i+1 >= 0 && j-1 >= 0 && cells[i+1][j-1] !=null)
                     cells[i][j].getVoisins()[7]=cells[i+1][j-1];
-
-
+                
+                
             }
-        }      
+        }
     }
 }
