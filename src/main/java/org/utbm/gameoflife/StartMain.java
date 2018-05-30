@@ -61,8 +61,11 @@ public class StartMain extends Application{
         //creation et initialisation des cellules
         grid = new Grid2D(tailleX,tailleY);
         
-        initMatrice2D(densite);
         
+        if(typeJeu =="JeuDeLaVie")
+            JeuDeLaVie.initMatrice2D(tailleX, tailleY, grid, densite);
+        else
+            JeuDeLaVie.initMatrice2D(tailleX, tailleY, grid, densite);
         //definir les acteurs (representation des cellules)
         circles = new Circle[tailleX][tailleY];
         creationVisuel2D( root);
@@ -85,18 +88,7 @@ public class StartMain extends Application{
         littleCycle.setCycleCount(nbCycle);
         littleCycle.play();
     }
-    /**
-     *
-     * @param densite
-     *  initialisation de la matrice
-     */
-    void initMatrice2D(double densite)
-    {
-        for(int i=0; i<tailleX; i++)
-            for(int j=0; j<tailleY; j++)
-                if(Math.random()<densite)
-                    grid.getCell(i, j).setEtat(1);
-    }
+
     
     /**
      *creation des cercles et de leurs couleurs en fonction de l'etat de leur cellule (cellule située aux même coordonnées (i,j))
