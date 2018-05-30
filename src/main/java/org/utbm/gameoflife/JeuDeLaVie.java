@@ -41,4 +41,17 @@ public class JeuDeLaVie {
             {grid.getCell(x, y).setEtat(1); circles[x][y].setFill(Couleur.getValeurByInt(grid.getCell(x, y).getEtat()));}
         }
     }
+    
+    /**
+     *
+     * @param densite
+     *  initialisation de la matrice
+     */
+    public static void initMatrice2D(int tailleX, int tailleY, Grid2D grid, double densite)
+    {
+        for(int i=0; i<tailleX; i++)
+            for(int j=0; j<tailleY; j++)
+                if(Math.random()<densite)
+                    grid.getCell(i, j).setEtat(1);
+    }
 }
