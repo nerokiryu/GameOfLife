@@ -39,10 +39,10 @@ public class StartMain extends Application{
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        tailleX=tailleY=40;
-        tempo = 1000;
-        sizeCell = 16;
-        densite = 0.5;
+        tailleX=tailleY=100;
+        tempo = 100;
+        sizeCell = 6;
+        densite = 0.55;
         //snbCycle = 50;
         //typeJeu = "JeuDeLaVie";
         typeJeu = "feuforet";
@@ -80,16 +80,15 @@ public class StartMain extends Application{
         //-----lancer le timer pour faire vivre la matrice
         Timeline littleCycle = new Timeline(new KeyFrame(Duration.millis(tempo),
                 event-> {
-<<<<<<< HEAD
+
                     
-=======
-                    copie(grid,gridOld);
->>>>>>> 9d77da63ef15e6d671605baed377dc835fbe3946
                     //à chaque top, lancer une evolution du jeu de la vie
                     if(typeJeu =="JeuDeLaVie")
                         JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
-                    else if(typeJeu == "feuforet")
-                        JeuSimulationFeuForet.evoluerMatrice(tailleX, tailleY, grid, circles);
+                    else if(typeJeu == "feuforet"){
+                        copie(grid,gridOld);
+                        JeuSimulationFeuForet.evoluerMatrice(tailleX, tailleY, grid, gridOld, circles);
+                    }
                     else
                         JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
                     
@@ -118,8 +117,10 @@ public class StartMain extends Application{
     void copie(Grid2D grid, Grid2D gridOld)
     {
         for(Cell2D[] cells :grid.getCells())
-            for(Cell2D cell : cells)
+            for(Cell2D cell : cells){
                 gridOld.getCell(cell.getPosition().getPosX(), cell.getPosition().getPosY()).setEtat(cell.getEtat());
+            }
+            gridOld.setVoisins();
     }
     
     /**

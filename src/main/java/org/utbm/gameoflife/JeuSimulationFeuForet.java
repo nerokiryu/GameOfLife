@@ -15,10 +15,11 @@ public class JeuSimulationFeuForet {
     /** 
      *evolution de l'ensemble de la matrice
      */
-    public static void evoluerMatrice(int tailleX, int tailleY, Grid2D grid, Circle[][] circles){
+    public static void evoluerMatrice(int tailleX, int tailleY, Grid2D grid, Grid2D gridOld, Circle[][] circles){
         for(int x=0; x<tailleX; x++)
             for(int y=0; y<tailleY; y++)
-                    evoluerCellule(x,y,grid, circles);
+                if(grid.getCell(x, y).getEtat()==Couleur.rouge.ordinal() || grid.getCell(x, y).getEtat()==Couleur.vert.ordinal())
+                    evoluerCellule(x,y,grid, gridOld, circles);
     }
         
         /**
@@ -27,15 +28,16 @@ public class JeuSimulationFeuForet {
          * @param y coordonnée en y de la céllule
          * logique de céllule unique
          */
-    public static void evoluerCellule(int x, int y, Grid2D grid, Circle[][] circles)
+    public static void evoluerCellule(int x, int y, Grid2D grid, Grid2D gridOld, Circle[][] circles)
     {
         if(grid.getCell(x, y).getEtat()==Couleur.rouge.ordinal()){
             grid.getCell(x, y).setEtat(Couleur.gris.ordinal());
         }
         else if(grid.getCell(x, y).getEtat()==Couleur.vert.ordinal()){
-            for(Cell2D cell: grid.getCell(x, y).getVoisins()){
+            for(Cell2D cell: gridOld.getCell(x, y).getVoisins()){
                 if(cell != null && cell.getEtat()==Couleur.rouge.ordinal()){
                     grid.getCell(x, y).setEtat(Couleur.rouge.ordinal());
+                    circles[x][y].setFill(Couleur.getValeurByInt(grid.getCell(x, y).getEtat()));
                     break;
                 }
             }
@@ -44,6 +46,7 @@ public class JeuSimulationFeuForet {
         
         circles[x][y].setFill(Couleur.getValeurByInt(grid.getCell(x, y).getEtat()));
     }
+    
     
     public static void initMatrice2D(int tailleX, int tailleY, Grid2D grid, double densite)
     {
