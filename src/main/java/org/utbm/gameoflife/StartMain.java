@@ -21,7 +21,7 @@ import javafx.util.Duration;
  */
 public class StartMain extends Application{
     /**matrice representant l'ETAT des cellules*/
-    Grid2D grid;
+    Grid2D grid, gridOld;
     /**objets graphiques représentant les cellules*/
     public  Circle[][] circles;
     /**taille d'une cellule en pixel*/
@@ -61,7 +61,7 @@ public class StartMain extends Application{
         primaryStage.setScene(scene);
         //creation et initialisation des cellules
         grid = new Grid2D(tailleX,tailleY);
-        
+        gridOld = new Grid2D(tailleX,tailleY);
         
         if(typeJeu =="JeuDeLaVie")
             JeuDeLaVie.initMatrice2D(tailleX, tailleY, grid, densite);
@@ -80,7 +80,11 @@ public class StartMain extends Application{
         //-----lancer le timer pour faire vivre la matrice
         Timeline littleCycle = new Timeline(new KeyFrame(Duration.millis(tempo),
                 event-> {
+<<<<<<< HEAD
                     
+=======
+                    copie(grid,gridOld);
+>>>>>>> 9d77da63ef15e6d671605baed377dc835fbe3946
                     //à chaque top, lancer une evolution du jeu de la vie
                     if(typeJeu =="JeuDeLaVie")
                         JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
@@ -109,6 +113,13 @@ public class StartMain extends Application{
                 if (grid.getCell(i,j).getEtat()>=0) circles[i][j].setFill(Couleur.getValeurByInt(grid.getCell(i,j).getEtat()));
                 root.getChildren().add(circles[i][j]);
             }
+    }
+    
+    void copie(Grid2D grid, Grid2D gridOld)
+    {
+        for(Cell2D[] cells :grid.getCells())
+            for(Cell2D cell : cells)
+                gridOld.getCell(cell.getPosition().getPosX(), cell.getPosition().getPosY()).setEtat(cell.getEtat());
     }
     
     /**
