@@ -58,7 +58,8 @@ public class StartMain extends Application{
         sizeCell = calculerTailleCellulesSelonTailleEcran (limitesEcran,200,nbColonnesCellules,nbLignesCellules);
         densite = 0.5;
         //snbCycle = 50;
-        typeJeu = "JeuDeLaVie";
+        //typeJeu = "JeuDeLaVie";
+        typeJeu = "feuforet";
         construireSceneJeu(primaryStage);
         
     }
@@ -104,7 +105,9 @@ public class StartMain extends Application{
         gridOld = new Grid2D(nbColonnesCellules,nbLignesCellules);
         
         if(typeJeu =="JeuDeLaVie")
-            JeuDeLaVie.initMatrice2D(nbColonnesCellules, nbLignesCellules, grid, densite);
+            JeuDeLaVie.initMatrice2D(tailleX, tailleY, grid, densite);
+        else if(typeJeu == "feuforet")
+            JeuSimulationFeuForet.initMatrice2D(tailleX, tailleY, grid, densite);
         else
             JeuDeLaVie.initMatrice2D(nbColonnesCellules, nbLignesCellules, grid, densite);
         
@@ -119,10 +122,15 @@ public class StartMain extends Application{
         //-----lancer le timer pour faire vivre la matrice
         Timeline littleCycle = new Timeline(new KeyFrame(Duration.millis(tempo),
                 event-> {
-                    copie(grid,gridOld);
+
+                    
                     //à chaque top, lancer une evolution du jeu de la vie
                     if(typeJeu =="JeuDeLaVie")
-                        JeuDeLaVie.evoluerMatrice(nbColonnesCellules, nbLignesCellules, grid, circles);
+                        JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
+                    else if(typeJeu == "feuforet"){
+                        copie(grid,gridOld);
+                        JeuSimulationFeuForet.evoluerMatrice(tailleX, tailleY, grid, gridOld, circles);
+                    }
                     else
                         JeuDeLaVie.evoluerMatrice(nbColonnesCellules, nbLignesCellules, grid, circles);
                     
@@ -151,8 +159,10 @@ public class StartMain extends Application{
     void copie(Grid2D grid, Grid2D gridOld)
     {
         for(Cell2D[] cells :grid.getCells())
-            for(Cell2D cell : cells)
+            for(Cell2D cell : cells){
                 gridOld.getCell(cell.getPosition().getPosX(), cell.getPosition().getPosY()).setEtat(cell.getEtat());
+            }
+            gridOld.setVoisins();
     }
     
     /**
