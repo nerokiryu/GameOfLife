@@ -59,7 +59,8 @@ public class StartMain extends Application{
         densite = 0.5;
         //snbCycle = 50;
         //typeJeu = "JeuDeLaVie";
-        typeJeu = "fourmi";
+        //typeJeu = "fourmi";
+        typeJeu = "feuforet";
         construireSceneJeu(primaryStage);
         
     }
@@ -104,17 +105,17 @@ public class StartMain extends Application{
         grid = new Grid2D(nbColonnesCellules,nbLignesCellules);
         gridOld = new Grid2D(nbColonnesCellules,nbLignesCellules);
         
-        Position posfourmi= new Position(tailleX/2, tailleY/2);
-        Position posfourmiold = new Position(tailleX/2, tailleY/2);
+        Position posfourmi= new Position(nbColonnesCellules/2, nbLignesCellules/2);
+        Position posfourmiold = new Position(nbColonnesCellules/2, nbLignesCellules/2);
                
         if(typeJeu =="JeuDeLaVie")
-            JeuDeLaVie.initMatrice2D(tailleX, tailleY, grid, densite);
+            JeuDeLaVie.initMatrice2D(nbColonnesCellules, nbLignesCellules, grid, densite);
         else if(typeJeu == "feuforet")
-            JeuSimulationFeuForet.initMatrice2D(tailleX, tailleY, grid, densite);
+            JeuSimulationFeuForet.initMatrice2D(nbColonnesCellules, nbLignesCellules, grid, densite);
         else if(typeJeu == "fourmi"){
             
             copie(grid,gridOld);
-            FourmiLangton.initMatrice2D(tailleX, tailleY, grid);
+            FourmiLangton.initMatrice2D(nbColonnesCellules, nbLignesCellules, grid);
         }
         else
             JeuDeLaVie.initMatrice2D(nbColonnesCellules, nbLignesCellules, grid, densite);
@@ -134,12 +135,12 @@ public class StartMain extends Application{
                     
                     //à chaque top, lancer une evolution du jeu de la vie
                     if(typeJeu =="JeuDeLaVie")
-                        JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
+                        JeuDeLaVie.evoluerMatrice(nbColonnesCellules, nbLignesCellules, grid, circles);
                     else if(typeJeu == "feuforet"){
                         copie(grid,gridOld);
-                        JeuSimulationFeuForet.evoluerMatrice(tailleX, tailleY, grid, gridOld, circles);
+                        JeuSimulationFeuForet.evoluerMatrice(nbColonnesCellules, nbLignesCellules, grid, gridOld, circles);
                     }
-                    else if(typeJeu == "fourmi" && posfourmi.getPosX()>=0 && posfourmi.getPosX()<tailleX && posfourmi.getPosY()>=0 && posfourmi.getPosY()<tailleY){
+                    else if(typeJeu == "fourmi" && posfourmi.getPosX()>=0 && posfourmi.getPosX()<nbColonnesCellules && posfourmi.getPosY()>=0 && posfourmi.getPosY()<nbLignesCellules){
                         
                         FourmiLangton.evoluerMatrice(grid,posfourmi, posfourmiold, circles);
                     }
@@ -150,7 +151,7 @@ public class StartMain extends Application{
                             
                         }
                     
-                        //JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
+                        //JeuDeLaVie.evoluerMatrice(nbColonnesCellules, nbLignesCellules, grid, circles);
                     
                 } ));
         //animation en boucle

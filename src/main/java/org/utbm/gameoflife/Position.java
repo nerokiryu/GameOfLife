@@ -27,9 +27,9 @@ public class Position {
         this.posX = x;
     }
     public int getPosY(){
-        return posX;
+        return posY;
     }
     public void setPosY(int y){
-        this.posX = y;
+        this.posY = y;
     }
 }

@@ -10,7 +10,7 @@ import javafx.scene.paint.Color;
  * @author Nero
  */
 public enum Couleur {
-    noir(Color.DARKSLATEGRAY),blanc(Color.ANTIQUEWHITE),vert(Color.YELLOWGREEN),rouge(Color.FIREBRICK),jaune(Color.GOLD),violet(Color.SLATEBLUE),orange(Color.DARKORANGE),bleu(Color.STEELBLUE),marron(Color.SIENNA);
+    noir(Color.DARKSLATEGRAY),blanc(Color.ANTIQUEWHITE),vert(Color.YELLOWGREEN),rouge(Color.FIREBRICK),jaune(Color.GOLD),violet(Color.SLATEBLUE),orange(Color.DARKORANGE),bleu(Color.STEELBLUE),marron(Color.SIENNA),gris(Color.DARKGRAY);
     private final Color valeur;
     
     private Couleur(Color c) {
