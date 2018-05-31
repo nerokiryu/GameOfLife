@@ -40,16 +40,16 @@ public class StartMain extends Application{
     @Override
     public void start(Stage primaryStage) throws Exception {
         tailleX=tailleY=100;
-        tempo = 100;
+        tempo = 1;
         sizeCell = 6;
         densite = 0.55;
         //snbCycle = 50;
         //typeJeu = "JeuDeLaVie";
-        typeJeu = "feuforet";
+        typeJeu = "fourmi";
         construireSceneJeu(primaryStage);
         
     }
-    void construireSceneJeu(Stage primaryStage)
+    void construireSceneJeu(Stage primaryStage) throws Exception
     {
         int largeur = (tailleX+1) * (sizeCell+1);
         int hauteur = (tailleY+1) * (sizeCell+1);
@@ -63,10 +63,18 @@ public class StartMain extends Application{
         grid = new Grid2D(tailleX,tailleY);
         gridOld = new Grid2D(tailleX,tailleY);
         
+        Position posfourmi= new Position(tailleX/2, tailleY/2);
+        Position posfourmiold = new Position(tailleX/2, tailleY/2);
+               
         if(typeJeu =="JeuDeLaVie")
             JeuDeLaVie.initMatrice2D(tailleX, tailleY, grid, densite);
         else if(typeJeu == "feuforet")
             JeuSimulationFeuForet.initMatrice2D(tailleX, tailleY, grid, densite);
+        else if(typeJeu == "fourmi"){
+            
+            copie(grid,gridOld);
+            FourmiLangton.initMatrice2D(tailleX, tailleY, grid);
+        }
         else
             JeuDeLaVie.initMatrice2D(tailleX, tailleY, grid, densite);
         //definir les acteurs (representation des cellules)
@@ -89,8 +97,18 @@ public class StartMain extends Application{
                         copie(grid,gridOld);
                         JeuSimulationFeuForet.evoluerMatrice(tailleX, tailleY, grid, gridOld, circles);
                     }
+                    else if(typeJeu == "fourmi" && posfourmi.getPosX()>=0 && posfourmi.getPosX()<tailleX && posfourmi.getPosY()>=0 && posfourmi.getPosY()<tailleY){
+                        
+                        FourmiLangton.evoluerMatrice(grid,posfourmi, posfourmiold, circles);
+                    }
                     else
-                        JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
+                        try{
+                            this.stop();
+                        }catch(Exception e){
+                            
+                        }
+                    
+                        //JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
                     
                 } ));
         //animation en boucle
