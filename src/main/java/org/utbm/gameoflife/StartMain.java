@@ -5,6 +5,8 @@
 */
 package org.utbm.gameoflife;
 
+import java.awt.geom.Rectangle2D;
+import static java.lang.Math.min;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
@@ -12,6 +14,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
+import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
 
@@ -27,7 +30,7 @@ public class StartMain extends Application{
     /**taille d'une cellule en pixel*/
     int sizeCell = 10;
     /**longueur de la matrice (en nombre de cellules sur une rangée)*/
-    private int tailleX,tailleY;
+    private int nbColonnesCellules,nbLignesCellules;
     /**densite de cellules actives au départ*/
     double densite;
     /**nb de cycles d'execution**/
@@ -39,36 +42,75 @@ public class StartMain extends Application{
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        tailleX=tailleY=40;
+        
+        // Passer en fullscreen
+        Screen ecran = Screen.getPrimary();
+        javafx.geometry.Rectangle2D limitesEcran = ecran.getVisualBounds();
+
+        primaryStage.setX(limitesEcran.getMinX());
+        primaryStage.setY(limitesEcran.getMinY());
+        primaryStage.setWidth(limitesEcran.getWidth());
+        primaryStage.setHeight(limitesEcran.getHeight());
+        
+        // Initialisation de variables fondamentales
+        nbColonnesCellules=nbLignesCellules=40;
         tempo = 60;
-        sizeCell = 16;
+        sizeCell = calculerTailleCellulesSelonTailleEcran (limitesEcran,200,nbColonnesCellules,nbLignesCellules);
         densite = 0.5;
         //snbCycle = 50;
         typeJeu = "JeuDeLaVie";
         construireSceneJeu(primaryStage);
         
     }
+    
+    int calculerTailleCellulesSelonTailleEcran (javafx.geometry.Rectangle2D limitesEcran, 
+                                                int LargeurZoneBoutons,
+                                                int nbColonnesCellules,
+                                                int nbLignesCellules)
+    {
+        // Calculons les dimensions maximales d'une cellule pour que la grille rentre dans l'ecran
+        double largeurMax = (double)(limitesEcran.getWidth() - LargeurZoneBoutons)/ (double)nbColonnesCellules ;
+        double hauteurMax = (double)limitesEcran.getHeight() / (double)nbLignesCellules ;
+        
+        // Une cellule doit etre ronde : largeur = hauteur, arrondi à l'inférieur
+        int tailleMax = (int)min (largeurMax,hauteurMax);
+        
+        // Limiter la taille à une gamme choisie
+        if (tailleMax < 2)
+            tailleMax = 2 ;
+        else if (tailleMax > 16)
+            tailleMax = 16 ;
+        
+        return tailleMax ;
+    }
     void construireSceneJeu(Stage primaryStage)
     {
-        int largeur = (tailleX+1) * (sizeCell+1);
-        int hauteur = (tailleY+1) * (sizeCell+1);
+        int largeur = (nbColonnesCellules+1) * (sizeCell+1);
+        int hauteur = (nbLignesCellules+1) * (sizeCell+1);
         //definir la troupe
         Group root = new Group();
+        
+        // Definir le groupe contenant les cellules de l'automate
+        Group conteneurAutomate = new Group();
+        conteneurAutomate.setLayoutX(100);
+        //conteneurAutomate.setLayoutY(5);
+        root.getChildren().add(conteneurAutomate);
         //definir la scene principale
         Scene scene = new Scene(root, largeur, hauteur, Color.BLACK);
         primaryStage.setTitle("Jeux");
         primaryStage.setScene(scene);
         //creation et initialisation des cellules
-        grid = new Grid2D(tailleX,tailleY);
-        gridOld = new Grid2D(tailleX,tailleY);
+        grid = new Grid2D(nbColonnesCellules,nbLignesCellules);
+        gridOld = new Grid2D(nbColonnesCellules,nbLignesCellules);
         
         if(typeJeu =="JeuDeLaVie")
-            JeuDeLaVie.initMatrice2D(tailleX, tailleY, grid, densite);
+            JeuDeLaVie.initMatrice2D(nbColonnesCellules, nbLignesCellules, grid, densite);
         else
-            JeuDeLaVie.initMatrice2D(tailleX, tailleY, grid, densite);
+            JeuDeLaVie.initMatrice2D(nbColonnesCellules, nbLignesCellules, grid, densite);
+        
         //definir les acteurs (representation des cellules)
-        circles = new Circle[tailleX][tailleY];
-        creationVisuel2D( root);
+        circles = new Circle[nbColonnesCellules][nbLignesCellules];
+        creationVisuel2D(conteneurAutomate);
         
         //afficher le theatre
         primaryStage.show();
@@ -80,9 +122,9 @@ public class StartMain extends Application{
                     copie(grid,gridOld);
                     //à chaque top, lancer une evolution du jeu de la vie
                     if(typeJeu =="JeuDeLaVie")
-                        JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
+                        JeuDeLaVie.evoluerMatrice(nbColonnesCellules, nbLignesCellules, grid, circles);
                     else
-                        JeuDeLaVie.evoluerMatrice(tailleX, tailleY, grid, circles);
+                        JeuDeLaVie.evoluerMatrice(nbColonnesCellules, nbLignesCellules, grid, circles);
                     
                 } ));
         //animation en boucle
@@ -97,8 +139,8 @@ public class StartMain extends Application{
      */
     void creationVisuel2D(Group root)
     {
-        for(int i=0; i<tailleX; i++)
-            for(int j=0; j<tailleY; j++)
+        for(int i=0; i<nbColonnesCellules; i++)
+            for(int j=0; j<nbLignesCellules; j++)
             {
                 circles[i][j] = new Circle((i+1)*(sizeCell+1), (j+1)*(sizeCell+1), sizeCell/2);
                 if (grid.getCell(i,j).getEtat()>=0) circles[i][j].setFill(Couleur.getValeurByInt(grid.getCell(i,j).getEtat()));
