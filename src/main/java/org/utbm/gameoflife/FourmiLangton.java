@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package org.utbm.gameoflife;
 
 import javafx.scene.shape.Circle;
@@ -12,23 +12,30 @@ import javafx.scene.shape.Circle;
  * @author nbarras
  */
 public class FourmiLangton {
-    /** 
+    /**
      *evolution de l'ensemble de la matrice
+     * @param grid
+     * @param posfourmi
+     * @param posfourmiold
+     * @param circles
      */
-
+    
     public static void evoluerMatrice(Grid2D grid, Position posfourmi, Position posfourmiold, Circle[][] circles){
-
-        evoluerCellule(grid,posfourmi,posfourmiold, circles, directionfourmi(posfourmi, posfourmiold));
-
-                    
-    }
         
-        /**
-         * 
-         * @param x coordonnée en x de la céllule
-         * @param y coordonnée en y de la céllule
-         * logique de céllule unique
-         */
+        evoluerCellule(grid,posfourmi,posfourmiold, circles, directionfourmi(posfourmi, posfourmiold));
+        
+        
+    }
+    
+    /**
+     * logique de céllule unique
+     * @param grid
+     * @param posfourmi
+     * @param posfourmiold
+     * @param circles
+     * @param dir
+     *
+     */
     public static void evoluerCellule(Grid2D grid, Position posfourmi,Position posfourmiold, Circle[][] circles, int dir)
     {
         if(grid.getCell(posfourmi.getPosX(), posfourmi.getPosY()).getEtat()==Couleur.noir.ordinal()){ //si la cellule est noir on va a gauche en fonction de la direction actuel
@@ -41,7 +48,7 @@ public class FourmiLangton {
                     //grid.getCell(x, y+1).setEtat(Couleur.rouge.ordinal());
                     posfourmi.setPosY(posfourmi.getPosY()+1);
                     break;
-                case 1: // en haut a gauche 
+                case 1: // en haut a gauche
                     //grid.getCell(x-1, y).setEtat(Couleur.rouge.ordinal());
                     posfourmi.setPosX(posfourmi.getPosX()-1);
                     break;
@@ -65,7 +72,7 @@ public class FourmiLangton {
                     //grid.getCell(x, y-1).setEtat(Couleur.rouge.ordinal());
                     posfourmi.setPosY(posfourmi.getPosY()-1);
                     break;
-                case 1: // en haut a droite 
+                case 1: // en haut a droite
                     //grid.getCell(x+1, y).setEtat(Couleur.rouge.ordinal());
                     posfourmi.setPosX(posfourmi.getPosX()+1);
                     break;
@@ -85,7 +92,7 @@ public class FourmiLangton {
 //                case 0: // a gauche a gauche
 //                    grid.getCell(x, y+1).setEtat(Couleur.rouge.ordinal());
 //                    break;
-//                case 1: // en haut a gauche 
+//                case 1: // en haut a gauche
 //                    grid.getCell(x-1, y).setEtat(Couleur.rouge.ordinal());
 //                    break;
 //                case 2: // a droite a gauche

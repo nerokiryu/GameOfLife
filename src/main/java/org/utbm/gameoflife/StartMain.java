@@ -5,7 +5,6 @@
 */
 package org.utbm.gameoflife;
 
-import java.awt.geom.Rectangle2D;
 import static java.lang.Math.min;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
@@ -46,7 +45,7 @@ public class StartMain extends Application{
         // Passer en fullscreen
         Screen ecran = Screen.getPrimary();
         javafx.geometry.Rectangle2D limitesEcran = ecran.getVisualBounds();
-
+        
         primaryStage.setX(limitesEcran.getMinX());
         primaryStage.setY(limitesEcran.getMinY());
         primaryStage.setWidth(limitesEcran.getWidth());
@@ -65,10 +64,10 @@ public class StartMain extends Application{
         
     }
     
-    int calculerTailleCellulesSelonTailleEcran (javafx.geometry.Rectangle2D limitesEcran, 
-                                                int LargeurZoneBoutons,
-                                                int nbColonnesCellules,
-                                                int nbLignesCellules)
+    int calculerTailleCellulesSelonTailleEcran (javafx.geometry.Rectangle2D limitesEcran,
+            int LargeurZoneBoutons,
+            int nbColonnesCellules,
+            int nbLignesCellules)
     {
         // Calculons les dimensions maximales d'une cellule pour que la grille rentre dans l'ecran
         double largeurMax = (double)(limitesEcran.getWidth() - LargeurZoneBoutons)/ (double)nbColonnesCellules ;
@@ -107,12 +106,12 @@ public class StartMain extends Application{
         
         Position posfourmi= new Position(nbColonnesCellules/2, nbLignesCellules/2);
         Position posfourmiold = new Position(nbColonnesCellules/2, nbLignesCellules/2);
-               
-        if(typeJeu =="JeuDeLaVie")
+        
+        if("JeuDeLaVie".equals(typeJeu))
             JeuDeLaVie.initMatrice2D(nbColonnesCellules, nbLignesCellules, grid, densite);
-        else if(typeJeu == "feuforet")
+        else if("feuforet".equals(typeJeu))
             JeuSimulationFeuForet.initMatrice2D(nbColonnesCellules, nbLignesCellules, grid, densite);
-        else if(typeJeu == "fourmi"){
+        else if("fourmi".equals(typeJeu)){
             
             copie(grid,gridOld);
             FourmiLangton.initMatrice2D(nbColonnesCellules, nbLignesCellules, grid);
@@ -131,16 +130,16 @@ public class StartMain extends Application{
         //-----lancer le timer pour faire vivre la matrice
         Timeline littleCycle = new Timeline(new KeyFrame(Duration.millis(tempo),
                 event-> {
-
+                    
                     
                     //à chaque top, lancer une evolution du jeu de la vie
-                    if(typeJeu =="JeuDeLaVie")
+                    if("JeuDeLaVie".equals(typeJeu))
                         JeuDeLaVie.evoluerMatrice(nbColonnesCellules, nbLignesCellules, grid, circles);
-                    else if(typeJeu == "feuforet"){
+                    else if("feuforet".equals(typeJeu)){
                         copie(grid,gridOld);
                         JeuSimulationFeuForet.evoluerMatrice(nbColonnesCellules, nbLignesCellules, grid, gridOld, circles);
                     }
-                    else if(typeJeu == "fourmi" && posfourmi.getPosX()>=0 && posfourmi.getPosX()<nbColonnesCellules && posfourmi.getPosY()>=0 && posfourmi.getPosY()<nbLignesCellules){
+                    else if("fourmi".equals(typeJeu) && posfourmi.getPosX()>=0 && posfourmi.getPosX()<nbColonnesCellules && posfourmi.getPosY()>=0 && posfourmi.getPosY()<nbLignesCellules){
                         
                         FourmiLangton.evoluerMatrice(grid,posfourmi, posfourmiold, circles);
                     }
@@ -151,14 +150,14 @@ public class StartMain extends Application{
                             
                         }
                     
-                        //JeuDeLaVie.evoluerMatrice(nbColonnesCellules, nbLignesCellules, grid, circles);
+                    //JeuDeLaVie.evoluerMatrice(nbColonnesCellules, nbLignesCellules, grid, circles);
                     
                 } ));
         //animation en boucle
         littleCycle.setCycleCount(nbCycle);
         littleCycle.play();
     }
-
+    
     
     /**
      *creation des cercles et de leurs couleurs en fonction de l'etat de leur cellule (cellule située aux même coordonnées (i,j))
@@ -181,7 +180,7 @@ public class StartMain extends Application{
             for(Cell2D cell : cells){
                 gridOld.getCell(cell.getPosition().getPosX(), cell.getPosition().getPosY()).setEtat(cell.getEtat());
             }
-            gridOld.setVoisins();
+        gridOld.setVoisins();
     }
     
     /**
