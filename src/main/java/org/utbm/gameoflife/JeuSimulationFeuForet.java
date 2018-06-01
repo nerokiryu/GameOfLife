@@ -1,8 +1,8 @@
 /*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
+* To change this license header, choose License Headers in Project Properties.
+* To change this template file, choose Tools | Templates
+* and open the template in the editor.
+*/
 package org.utbm.gameoflife;
 
 import javafx.scene.shape.Circle;
@@ -12,8 +12,13 @@ import javafx.scene.shape.Circle;
  * @author nbarras
  */
 public class JeuSimulationFeuForet {
-    /** 
+    /**
      *evolution de l'ensemble de la matrice
+     * @param tailleX
+     * @param tailleY
+     * @param grid
+     * @param gridOld
+     * @param circles
      */
     public static void evoluerMatrice(int tailleX, int tailleY, Grid2D grid, Grid2D gridOld, Circle[][] circles){
         for(int x=0; x<tailleX; x++)
@@ -21,13 +26,16 @@ public class JeuSimulationFeuForet {
                 if(grid.getCell(x, y).getEtat()==Couleur.rouge.ordinal() || grid.getCell(x, y).getEtat()==Couleur.vert.ordinal())
                     evoluerCellule(x,y,grid, gridOld, circles);
     }
-        
-        /**
-         * 
-         * @param x coordonnée en x de la céllule
-         * @param y coordonnée en y de la céllule
-         * logique de céllule unique
-         */
+    
+    /**
+     *
+     * logique de céllule unique
+     * @param x coordonnée en x de la céllule
+     * @param y coordonnée en y de la céllule
+     * @param grid
+     * @param gridOld
+     * @param circles
+     */
     public static void evoluerCellule(int x, int y, Grid2D grid, Grid2D gridOld, Circle[][] circles)
     {
         if(grid.getCell(x, y).getEtat()==Couleur.rouge.ordinal()){

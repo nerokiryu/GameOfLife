@@ -5,8 +5,6 @@
 */
 
 package org.utbm.gameoflife;
-import java.util.Map;
-import javafx.scene.paint.Color;
 /**
  *
  * @author Nero
