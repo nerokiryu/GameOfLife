@@ -53,11 +53,16 @@ public class StartMain extends Application{
     String typeJeu;
     /**délai en ms entre chaque évolution*/
     private int tempo;
-
+    private static Stage primaryStage;
     @FXMLViewFlowContext
     private ViewFlowContext flowContext;
 
-public void testAffichage(Stage primaryStage)    {
+    public static Stage getPrimaryStage() {
+        return primaryStage;
+    }
+
+public void testAffichage(Stage stage)    {
+    primaryStage = stage;
         new Thread(() -> {
             try {
                 SVGGlyphLoader.loadGlyphsFont(StartMain.class.getResourceAsStream("/fonts/icomoon.svg"),
@@ -157,6 +162,9 @@ public void testAffichage(Stage primaryStage)    {
         
         return tailleMax ;
     }
+    
+
+    
     void construireSceneJeu(Stage primaryStage)
     {
         int largeur = (nbColonnesCellules+1) * (sizeCell+1);
