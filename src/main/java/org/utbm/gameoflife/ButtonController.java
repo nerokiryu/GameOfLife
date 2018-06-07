@@ -27,4 +27,18 @@ public class ButtonController {
     void HandleStart(ActionEvent event){
         StartMain.getInstance().construireSceneJeu();
     }
+
+    @FXML
+    void HandleGameType(ActionEvent event){
+       
+    }
+    @FXML
+    void HandleOptions(ActionEvent event){
+       
+    }
+    @FXML
+    void HandleEditor(ActionEvent event){
+       
+    }
+    
 }

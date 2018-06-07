@@ -12,19 +12,19 @@
         
         
         <HBox spacing="40" style="-fx-padding: 0 0 0 100;">
-            <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="START"
+            <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="START" onAction="#HandleStart"
                        style="-fx-text-fill:WHITE;-fx-background-color:#5264AE;-fx-font-size:30px;"/>
         </HBox>
         <HBox spacing="40" style="-fx-padding: 0 0 0 100;">
-            <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="CHOOSE GAMETYPE"
+            <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="CHOOSE GAMETYPE" onAction="#HandleGameType"
                        style="-fx-text-fill:WHITE;-fx-background-color:#5264AE;-fx-font-size:30px;"/>
         </HBox>
         <HBox spacing="40" style="-fx-padding: 0 0 0 100;">
-            <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="OPTIONS"
+            <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="OPTIONS" onAction="#HandleOptions"
                        style="-fx-text-fill:WHITE;-fx-background-color:#5264AE;-fx-font-size:30px;"/>
         </HBox>
         <HBox spacing="40" style="-fx-padding: 0 0 0 100;">
-            <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="EDITOR"
+            <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="EDITOR" onAction="#HandleEditor"
                        style="-fx-text-fill:WHITE;-fx-background-color:#5264AE;-fx-font-size:30px;"/>
         </HBox>
         

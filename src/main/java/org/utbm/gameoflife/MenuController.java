@@ -9,6 +9,7 @@ import com.jfoenix.controls.JFXPopup.PopupHPosition;
 import com.jfoenix.controls.JFXPopup.PopupVPosition;
 import io.datafx.controller.FXMLController;
 import io.datafx.controller.flow.Flow;
+import io.datafx.controller.flow.FlowException;
 import io.datafx.controller.flow.FlowHandler;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
@@ -22,6 +23,9 @@ import javafx.util.Duration;
 import javax.annotation.PostConstruct;
 
 import static io.datafx.controller.flow.container.ContainerAnimations.SWIPE_LEFT;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javafx.event.ActionEvent;
 import org.utbm.gameoflife.datafx.ExtendedAnimatedFlowContainer;
 
 @FXMLController(value = "/fxml/menu.fxml", title = "Material Design Example")
@@ -45,7 +49,28 @@ public final class MenuController {
     private JFXDrawer drawer;
 
     private JFXPopup toolbarPopup;
+    
+   @FXML
+    void HandleBackMenu(ActionEvent event) throws Exception{
+        Loading();
+        //LoadingController.Next("menu", context, drawer);
 
+    }
+    
+    void Loading()throws FlowException{
+       Flow innerFlow = new Flow(LoadingController.class);
+       final FlowHandler flowHandler = innerFlow.createHandler(context);
+       context.register("ContentFlow", innerFlow);
+       context.register("ContentFlowHandler", flowHandler);
+       final Duration containerAnimationDuration = Duration.millis(320);
+        try {
+            drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, SWIPE_LEFT)));
+        }
+        catch (FlowException ex) {
+            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+        }
+       context.register("ContentPane", drawer.getContent().get(0));
+    }
     /**
      * init fxml when loaded.
      */
