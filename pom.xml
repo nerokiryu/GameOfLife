@@ -18,7 +18,25 @@
         <!-- Used as the 'Vendor' for JNLP generation -->
         <name>Your Organisation</name>
     </organization>
+    <dependencies>
+        <dependency>
+            <groupId>com.jfoenix</groupId>
+            <artifactId>jfoenix</artifactId>
+            <version>8.0.4</version>
+        </dependency>
+        <!-- https://mvnrepository.com/artifact/io.datafx/flow -->
+        <dependency>
+            <groupId>io.datafx</groupId>
+            <artifactId>flow</artifactId>
+            <version>8.0b7</version>
+        </dependency>
+        <dependency>
+          <groupId>de.jensd</groupId>
+          <artifactId>fontawesomefx</artifactId>
+          <version>8.9</version>
+        </dependency>
 
+    </dependencies>
     <build>
         <plugins>
             <plugin>

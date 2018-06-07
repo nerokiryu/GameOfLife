@@ -5,17 +5,33 @@
 */
 package org.utbm.gameoflife;
 
+import com.jfoenix.controls.JFXDecorator;
+import com.jfoenix.svg.SVGGlyph;
+import com.jfoenix.svg.SVGGlyphLoader;
+import io.datafx.controller.flow.Flow;
+import io.datafx.controller.flow.FlowException;
+import io.datafx.controller.flow.container.DefaultFlowContainer;
+import io.datafx.controller.flow.context.FXMLViewFlowContext;
+import io.datafx.controller.flow.context.ViewFlowContext;
+import java.io.IOException;
 import static java.lang.Math.min;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.KeyFrame;
 import javafx.animation.Timeline;
 import javafx.application.Application;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.geometry.Rectangle2D;
 import javafx.scene.Group;
+import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Circle;
 import javafx.stage.Screen;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+
 
 /**
  *
@@ -37,20 +53,67 @@ public class StartMain extends Application{
     String typeJeu;
     /**délai en ms entre chaque évolution*/
     private int tempo;
-    
+
+    @FXMLViewFlowContext
+    private ViewFlowContext flowContext;
+
+public void testAffichage(Stage primaryStage)    {
+        new Thread(() -> {
+            try {
+                SVGGlyphLoader.loadGlyphsFont(StartMain.class.getResourceAsStream("/fonts/icomoon.svg"),
+                    "icomoon.svg");
+            } catch (IOException ioExc) {
+                ioExc.printStackTrace();
+            }
+        }).start();
+
+        Flow flow = new Flow(MenuController.class);
+        DefaultFlowContainer container = new DefaultFlowContainer();
+        flowContext = new ViewFlowContext();
+        flowContext.register("Stage", primaryStage);
+        try {
+            flow.createHandler(flowContext).start(container);
+        }
+        catch (FlowException ex) {
+            Logger.getLogger(StartMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+
+        JFXDecorator decorator = new JFXDecorator(primaryStage, container.getView());
+        decorator.setCustomMaximize(true);
+        decorator.setGraphic(new SVGGlyph(""));
+        
+        primaryStage.setTitle("JFoenix Demo");
+
+        double width = 800;
+        double height = 600;
+        try {
+            Rectangle2D bounds = Screen.getScreens().get(0).getBounds();
+            width = bounds.getWidth() / 2.5;
+            height = bounds.getHeight() / 1.35;
+        }catch (Exception e){ }
+
+        Scene scene = new Scene(decorator, width, height);
+        final ObservableList<String> stylesheets = scene.getStylesheets();
+        stylesheets.addAll(//StartMain.class.getResource("/styles/jfoenix-fonts.css").toExternalForm(),
+                           //StartMain.class.getResource("/styles/jfoenix-design.css").toExternalForm(),
+                           StartMain.class.getResource("/styles/menu.css").toExternalForm());
+        primaryStage.setScene(scene);
+        primaryStage.show();
+}
     
     @Override
     public void start(Stage primaryStage) throws Exception {
         
-        // Passer en fullscreen
+        
         Screen ecran = Screen.getPrimary();
+     
         javafx.geometry.Rectangle2D limitesEcran = ecran.getVisualBounds();
         
         primaryStage.setX(limitesEcran.getMinX());
         primaryStage.setY(limitesEcran.getMinY());
         primaryStage.setWidth(limitesEcran.getWidth());
         primaryStage.setHeight(limitesEcran.getHeight());
-        
+
         // Initialisation de variables fondamentales
         nbColonnesCellules=nbLignesCellules=40;
         tempo = 600;
@@ -59,8 +122,18 @@ public class StartMain extends Application{
         //snbCycle = 50;
         typeJeu = "JeuDeLaVie";
         //typeJeu = "fourmi";
-        //typeJeu = "feuforet";
-        construireSceneJeu(primaryStage);
+        typeJeu = "feuforet";
+        
+//        Parent root = FXMLLoader.load(getClass().getResource("/fxml/menu.fxml"));
+//        Scene scene = new Scene(root);
+//        scene.getStylesheets().add("/styles/menu.css");
+//        
+//        primaryStage.setTitle("JavaFX and Maven");
+//        primaryStage.setScene(scene);
+//        primaryStage.show();
+        
+        testAffichage(primaryStage);
+        //construireSceneJeu(primaryStage);
         
     }
     
