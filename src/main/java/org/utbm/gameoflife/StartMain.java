@@ -56,12 +56,26 @@ public class StartMain extends Application{
     private static Stage primaryStage;
     @FXMLViewFlowContext
     private ViewFlowContext flowContext;
+    
+    private static StartMain instance=null;
+    private static Object objetSynchrone__;
 
+    public StartMain() {
+    
+    }
+    
+    public static StartMain getInstance() {
+        if (null == instance) { // Premier appel
+            instance = new StartMain();
+        }
+        return instance;
+    }
+    
     public static Stage getPrimaryStage() {
         return primaryStage;
     }
-
-public void testAffichage(Stage stage)    {
+    
+    public void testAffichage(Stage stage)    {
     primaryStage = stage;
         new Thread(() -> {
             try {
@@ -109,7 +123,8 @@ public void testAffichage(Stage stage)    {
     @Override
     public void start(Stage primaryStage) throws Exception {
         
-        
+        instance = new StartMain();
+        System.out.println("staaaaaaaaaaaaaaaaaaart");
         Screen ecran = Screen.getPrimary();
      
         javafx.geometry.Rectangle2D limitesEcran = ecran.getVisualBounds();
@@ -127,7 +142,7 @@ public void testAffichage(Stage stage)    {
         //snbCycle = 50;
         typeJeu = "JeuDeLaVie";
         //typeJeu = "fourmi";
-        typeJeu = "feuforet";
+        //typeJeu = "feuforet";
         
 //        Parent root = FXMLLoader.load(getClass().getResource("/fxml/menu.fxml"));
 //        Scene scene = new Scene(root);
@@ -142,10 +157,7 @@ public void testAffichage(Stage stage)    {
         
     }
     
-    int calculerTailleCellulesSelonTailleEcran (javafx.geometry.Rectangle2D limitesEcran,
-            int LargeurZoneBoutons,
-            int nbColonnesCellules,
-            int nbLignesCellules)
+    int calculerTailleCellulesSelonTailleEcran (javafx.geometry.Rectangle2D limitesEcran,int LargeurZoneBoutons,int nbColonnesCellules,int nbLignesCellules)
     {
         // Calculons les dimensions maximales d'une cellule pour que la grille rentre dans l'ecran
         double largeurMax = (double)(limitesEcran.getWidth() - LargeurZoneBoutons)/ (double)nbColonnesCellules ;
@@ -163,10 +175,9 @@ public void testAffichage(Stage stage)    {
         return tailleMax ;
     }
     
-
-    
-    void construireSceneJeu(Stage primaryStage)
+    void construireSceneJeu()
     {
+        System.out.println("youpi");
         int largeur = (nbColonnesCellules+1) * (sizeCell+1);
         int hauteur = (nbLignesCellules+1) * (sizeCell+1);
         //definir la troupe
@@ -238,7 +249,6 @@ public void testAffichage(Stage stage)    {
         littleCycle.setCycleCount(nbCycle);
         littleCycle.play();
     }
-    
     
     /**
      *creation des cercles et de leurs couleurs en fonction de l'etat de leur cellule (cellule située aux même coordonnées (i,j))
