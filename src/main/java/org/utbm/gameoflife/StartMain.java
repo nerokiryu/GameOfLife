@@ -53,13 +53,13 @@ public class StartMain extends Application{
         
         // Initialisation de variables fondamentales
         nbColonnesCellules=nbLignesCellules=40;
-        tempo = 60;
+        tempo = 600;
         sizeCell = calculerTailleCellulesSelonTailleEcran (limitesEcran,200,nbColonnesCellules,nbLignesCellules);
         densite = 0.5;
         //snbCycle = 50;
-        //typeJeu = "JeuDeLaVie";
+        typeJeu = "JeuDeLaVie";
         //typeJeu = "fourmi";
-        typeJeu = "feuforet";
+        //typeJeu = "feuforet";
         construireSceneJeu(primaryStage);
         
     }

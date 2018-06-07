@@ -12,6 +12,40 @@ import javafx.scene.shape.Circle;
  * @author Nero
  */
 public class JeuDeLaVie {
+    private static int nbminsolitude=2,nbmaxsurpopulation=3,nbminreproduction=3,nbmaxreproduction=3;
+
+    public static int getNbminsolitude() {
+        return nbminsolitude;
+    }
+
+    public static void setNbminsolitude(int nbminsolitude) {
+        JeuDeLaVie.nbminsolitude = nbminsolitude;
+    }
+
+    public static int getNbmaxsurpopulation() {
+        return nbmaxsurpopulation;
+    }
+
+    public static void setNbmaxsurpopulation(int nbmaxsurpopulation) {
+        JeuDeLaVie.nbmaxsurpopulation = nbmaxsurpopulation;
+    }
+
+    public static int getNbminreproduction() {
+        return nbminreproduction;
+    }
+
+    public static void setNbminreproduction(int nbminreproduction) {
+        JeuDeLaVie.nbminreproduction = nbminreproduction;
+    }
+
+    public static int getNbmaxreproduction() {
+        return nbmaxreproduction;
+    }
+
+    public static void setNbmaxreproduction(int nbmaxreproduction) {
+        JeuDeLaVie.nbmaxreproduction = nbmaxreproduction;
+    }
+    
     /**
      *evolution de l'ensemble de la matrice
      */
@@ -32,12 +66,12 @@ public class JeuDeLaVie {
         int nbVoisinesActives = grid.getCell(x, y).nbVoisinsEtat(1);
         if(grid.getCell(x, y).getEtat()==1)
         {
-            if(nbVoisinesActives > 3 || nbVoisinesActives < 2)
+            if(nbVoisinesActives < nbminsolitude || nbVoisinesActives > nbmaxsurpopulation)
             {grid.getCell(x, y).setEtat(0); circles[x][y].setFill(Couleur.getValeurByInt(grid.getCell(x, y).getEtat()));}
         }
         else
         {
-            if(nbVoisinesActives == 3)
+            if(nbVoisinesActives >= nbminreproduction  && nbVoisinesActives <= nbmaxreproduction )
             {grid.getCell(x, y).setEtat(1); circles[x][y].setFill(Couleur.getValeurByInt(grid.getCell(x, y).getEtat()));}
         }
     }
