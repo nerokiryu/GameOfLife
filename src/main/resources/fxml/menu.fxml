@@ -13,7 +13,7 @@
             <VBox spacing="20">
                 <JFXToolbar>
                     <leftItems>
-                        <JFXButton prefWidth="90" prefHeight="50" buttonType="FLAT" text="➜"
+                        <JFXButton prefWidth="90" prefHeight="50" buttonType="FLAT" text="➜" onAction="#HandleBackMenu"
                        style="-fx-text-fill:WHITE;-fx-background-color:#5264AE;-fx-font-size:35px;-fx-rotate: -180;"/>
                         <Label>Game Of Life</Label>
                     </leftItems>
