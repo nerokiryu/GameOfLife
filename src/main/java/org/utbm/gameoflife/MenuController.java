@@ -157,19 +157,15 @@ public final class MenuController {
         }
     }
 
-    static void MenuGameType() {
+    static void GoMenuGameType()throws Exception {
+           // set the default controller
         Flow innerFlow = new Flow(GametypeController.class);
-       //final FlowHandler flowHandler = innerFlow.createHandler(context);
-       
-       //context.register("ContentFlow", innerFlow);
-       //context.register("ContentFlowHandler", flowHandler);
-//       final Duration containerAnimationDuration = Duration.millis(320);
-//        try {
-//            drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, SWIPE_LEFT)));
-//        }
-//        catch (FlowException ex) {
-//            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
-//        }
-//       context.register("ContentPane", drawer.getContent().get(0));
+
+        final FlowHandler flowHandler = innerFlow.createHandler(context);
+        context.register("ContentFlowHandler", flowHandler);
+        context.register("ContentFlow", innerFlow);
+        final Duration containerAnimationDuration = Duration.millis(320);
+        drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, SWIPE_LEFT)));
+        context.register("ContentPane", drawer.getContent().get(0));
     }
 }
