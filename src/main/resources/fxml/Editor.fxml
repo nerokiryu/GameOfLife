@@ -4,14 +4,20 @@
 <?import javafx.scene.layout.HBox?>
 <?import javafx.scene.layout.StackPane?>
 <?import javafx.scene.layout.VBox?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
 <StackPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1"
            xmlns="http://javafx.com/javafx/2.2">
     <VBox spacing="50" maxWidth="450" maxHeight="600" alignment="CENTER">
         <children>
-
-            <JFXSlider id="min" styleClass="jfx-slider-style" maxWidth="300">
-            </JFXSlider>
-
+            <Label styleClass="title-label">Min before death</Label><JFXSlider id="min" styleClass="jfx-slider-style" maxWidth="300" max="8" ></JFXSlider>
+            <Label styleClass="title-label">Max before death</Label><JFXSlider id="max" styleClass="jfx-slider-style" maxWidth="300" max="8" ></JFXSlider>
+            <Label styleClass="title-label">Min Number of nearby cells for birth</Label><JFXSlider id="birthMin" styleClass="jfx-slider-style" maxWidth="300" max="8"></JFXSlider>
+            <Label styleClass="title-label">Max Number of nearby cells for birth</Label><JFXSlider id="birthMax" styleClass="jfx-slider-style" maxWidth="300" max="8"></JFXSlider>
+            <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="Submit" onAction="#HandleSubmit"
+                       style="-fx-text-fill:WHITE;-fx-background-color:#5264AE;-fx-font-size:30px;"/>
         </children>
     </VBox>
+    
 </StackPane>

@@ -34,7 +34,7 @@ public final class MenuController {
     
 
     @FXMLViewFlowContext
-    private ViewFlowContext context;
+    private static ViewFlowContext context;
 
     @FXML
     private StackPane root;
@@ -48,21 +48,48 @@ public final class MenuController {
     @FXML
     private JFXRippler optionsRippler;
     @FXML
-    private JFXDrawer drawer;
+    private static JFXDrawer drawer;
 
     private JFXPopup toolbarPopup;
     
    @FXML
     void HandleBackMenu(ActionEvent event) throws Exception{
-        Loading();
-        
+        Loading();  
+        LoadingController.Next("menu", context, drawer);
+
+
+    }
+    static void BackMenu() throws Exception{
+        Loading();  
         LoadingController.Next("menu", context, drawer);
 
 
     }
     
+    static void  GoEditor() throws FlowException{
+                // set the default controller
+        Flow innerFlow = new Flow(EditorController.class);
+
+        final FlowHandler flowHandler = innerFlow.createHandler(context);
+        context.register("ContentFlowHandler", flowHandler);
+        context.register("ContentFlow", innerFlow);
+        final Duration containerAnimationDuration = Duration.millis(320);
+        drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, SWIPE_LEFT)));
+        context.register("ContentPane", drawer.getContent().get(0));
+    }
+    static void  GoOptions() throws FlowException{
+                // set the default controller
+        Flow innerFlow = new Flow(OptionsController.class);
+
+        final FlowHandler flowHandler = innerFlow.createHandler(context);
+        context.register("ContentFlowHandler", flowHandler);
+        context.register("ContentFlow", innerFlow);
+        final Duration containerAnimationDuration = Duration.millis(320);
+        drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, SWIPE_LEFT)));
+        context.register("ContentPane", drawer.getContent().get(0));
+    }
     
-    void Loading()throws FlowException{
+    static void Loading()throws FlowException{
        Flow innerFlow = new Flow(LoadingController.class);
        final FlowHandler flowHandler = innerFlow.createHandler(context);
        context.register("ContentFlow", innerFlow);

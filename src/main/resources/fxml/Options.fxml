@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import com.jfoenix.controls.*?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.layout.*?>
+<?import com.jfoenix.validation.RequiredFieldValidator?>
+<?import de.jensd.fx.glyphs.fontawesome.FontAwesomeIconView?>
+<StackPane fx:id="root" xmlns:fx="http://javafx.com/fxml/1"
+           xmlns="http://javafx.com/javafx/2.2">
+    <VBox spacing="50" maxWidth="450" maxHeight="600" alignment="CENTER">
+        <children>
+            <Label styleClass="title-label">Density</Label><JFXSlider id="dens" styleClass="jfx-slider-style" maxWidth="300" max="100" ></JFXSlider>
+            <Label styleClass="title-label">Speed</Label><JFXSlider id="speed" styleClass="jfx-slider-style" maxWidth="300" min="1" max="100"></JFXSlider>
+            <JFXTextField id="nbcycle" promptText="number of cycle">
+                <validators>
+                    <RequiredFieldValidator message="Input Required!">
+                        <FontAwesomeIconView glyphName="WARNING" style="-fx-font-family: FontAwesome;"/>
+                    </RequiredFieldValidator>
+                </validators>
+            </JFXTextField>
+            <Label styleClass="title-label">Length of the grid</Label><JFXSlider id="length" styleClass="jfx-slider-style" maxWidth="300" min="1" max="300"></JFXSlider>
+            <Label styleClass="title-label">Height of the grid</Label><JFXSlider id="height" styleClass="jfx-slider-style" maxWidth="300" min="1" max="300"></JFXSlider>
+            <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="Submit" onAction="#HandleSubmit"
+                       style="-fx-text-fill:WHITE;-fx-background-color:#5264AE;-fx-font-size:30px;"/>
+        </children>
+    </VBox>
+    
+</StackPane>
