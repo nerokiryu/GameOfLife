@@ -169,6 +169,7 @@ public class StartMain extends Application{
             nbCycle=Integer.parseInt(args[1]);
             if(!"0".equals(args[2]))
             tempo=Integer.parseInt(args[2]);
+
             if(!"0".equals(args[3]))
             nbColonnesCellules=Integer.parseInt(args[3]);
             if(!"0".equals(args[4]))
@@ -228,7 +229,7 @@ public class StartMain extends Application{
         grid = new Grid2D(nbColonnesCellules,nbLignesCellules);
         gridOld = new Grid2D(nbColonnesCellules,nbLignesCellules);
         
-        Position posfourmi= new Position(nbColonnesCellules/2, nbLignesCellules/2);
+        Position posfourmi= new Position(nbColonnesCellules/2+2, nbLignesCellules/2-5);
         Position posfourmiold = new Position(nbColonnesCellules/2, nbLignesCellules/2);
         
         if("JeuDeLaVie".equals(typeJeu))
