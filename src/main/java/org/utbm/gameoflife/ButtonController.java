@@ -35,7 +35,7 @@ public class ButtonController {
         Runtime runTime = Runtime.getRuntime();
         try {
             System.out.println("open");
-            Process process = runTime.exec("java -jar ~/../target/GameOfLife-1.0-SNAPSHOT.jar "+StartMain.getInstance().densite+" "+StartMain.getInstance().nbCycle+" "+StartMain.getInstance().tempo+" "+StartMain.getInstance().nbColonnesCellules+" "+StartMain.getInstance().nbLignesCellules+" "+JeuDeLaVie.getNbminsolitude()+" "+JeuDeLaVie.getNbmaxsurpopulation()+" "+JeuDeLaVie.getNbminreproduction()+" "+JeuDeLaVie.getNbmaxreproduction());
+            Process process = runTime.exec("java -jar ~/../target/GameOfLife-1.0-SNAPSHOT.jar "+StartMain.getInstance().densite+" "+StartMain.getInstance().nbCycle+" "+StartMain.getInstance().tempo+" "+StartMain.getInstance().nbColonnesCellules+" "+StartMain.getInstance().nbLignesCellules+" "+JeuDeLaVie.getNbminsolitude()+" "+JeuDeLaVie.getNbmaxsurpopulation()+" "+JeuDeLaVie.getNbminreproduction()+" "+JeuDeLaVie.getNbmaxreproduction()+" "+StartMain.getInstance().typeJeu);
         }
         catch (IOException ex) {
             Logger.getLogger(ButtonController.class.getName()).log(Level.SEVERE, null, ex);
