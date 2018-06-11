@@ -46,7 +46,7 @@ public class OptionsController{
         double heightv=height.getValue();
         double speedv=speed.getValue();
         int nbcyclev=Integer.parseInt(nbcycle.getText());
-        StartMain.getInstance().densite=(int)densv;
+        StartMain.getInstance().densite=((101-(int)densv)/100);
         StartMain.getInstance().nbColonnesCellules=((int)lengthv);
         StartMain.getInstance().nbLignesCellules=((int)heightv);
         StartMain.getInstance().nbCycle=((int)nbcyclev);

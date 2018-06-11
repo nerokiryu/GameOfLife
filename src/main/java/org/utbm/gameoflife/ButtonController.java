@@ -6,6 +6,7 @@ import io.datafx.controller.flow.FlowException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Label;
@@ -54,5 +55,8 @@ public class ButtonController {
     void HandleEditor(ActionEvent event) throws FlowException{
        MenuController.GoEditor();
     }
-    
+    @FXML
+    void HandleExit(ActionEvent event) throws FlowException{
+       Platform.exit();
+    }
 }
