@@ -37,6 +37,21 @@ public class OptionsController{
     private JFXTextField nbcycle;   
     @FXML
     private JFXButton submit;
+    
+    
+        /**
+     * init fxml when loaded.
+     */
+    @PostConstruct
+    public void init() throws Exception {
+        int densite = (int) (StartMain.getInstance().densite*100);
+        System.out.println(StartMain.getInstance().densite);
+        dens.setValue(densite);
+        length.setValue( StartMain.getInstance().nbColonnesCellules);
+        height.setValue(StartMain.getInstance().nbLignesCellules);
+        speed.setValue(StartMain.getInstance().tempo);
+
+    }
 
 
 
@@ -47,11 +62,11 @@ public class OptionsController{
         double heightv=height.getValue();
         double speedv=speed.getValue();
         int nbcyclev;
-        if(Integer.parseInt(nbcycle.getText())>0)
+        if(!"".equals(nbcycle.getText()) && Integer.parseInt(nbcycle.getText())>0)
         nbcyclev=Integer.parseInt(nbcycle.getText());
         else
         nbcyclev=Timeline.INDEFINITE;
-        StartMain.getInstance().densite=((101-(int)densv)/100);
+        StartMain.getInstance().densite=(densv/100);
         StartMain.getInstance().nbColonnesCellules=((int)lengthv);
         StartMain.getInstance().nbLignesCellules=((int)heightv);
         StartMain.getInstance().nbCycle=((int)nbcyclev);

@@ -56,7 +56,14 @@ public class EditorController {
             System.out.println("mouse released");
             HandleBirthMax();
         });
-        
+        max.setValue(JeuDeLaVie.getNbmaxsurpopulation());
+        min.setValue(JeuDeLaVie.getNbminsolitude());
+        birthMax.setValue(JeuDeLaVie.getNbmaxreproduction());
+        birthMin.setValue(JeuDeLaVie.getNbminreproduction());
+        HandleBirthMax();
+        HandleBirthMin();
+        HandleMax();
+        HandleMin();
     }
 
     void HandleMin() {

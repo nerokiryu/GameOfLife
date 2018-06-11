@@ -181,8 +181,8 @@ public class StartMain extends Application{
             JeuDeLaVie.setNbminreproduction(Integer.parseInt(args[7]));
             if(!"3".equals(args[8]))
             JeuDeLaVie.setNbmaxreproduction(Integer.parseInt(args[8]));
-            //if(!"fourmi".equals(args[9]))
-            typeJeu=args[9];
+            if(!"JeuDeLaVie".equals(args[9]))
+                typeJeu=args[9];
             construireSceneJeu(primaryStage);
         }
     }

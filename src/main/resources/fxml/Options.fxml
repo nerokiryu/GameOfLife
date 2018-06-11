@@ -22,8 +22,8 @@
                     </RequiredFieldValidator>
                 </validators>
             </JFXTextField>
-            <Label styleClass="title-label">Length of the grid</Label><JFXSlider id="length" styleClass="jfx-slider-style" maxWidth="300" min="1" max="300"></JFXSlider>
-            <Label styleClass="title-label">Height of the grid</Label><JFXSlider id="height" styleClass="jfx-slider-style" maxWidth="300" min="1" max="300"></JFXSlider>
+            <Label styleClass="title-label">Length of the grid</Label><JFXSlider id="length" styleClass="jfx-slider-style" maxWidth="300" min="1" max="150"></JFXSlider>
+            <Label styleClass="title-label">Height of the grid</Label><JFXSlider id="height" styleClass="jfx-slider-style" maxWidth="300" min="1" max="150"></JFXSlider>
             <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="Submit" onAction="#HandleSubmit"
                        style="-fx-text-fill:WHITE;-fx-background-color:#5264AE;-fx-font-size:30px;"/>
         </children>
