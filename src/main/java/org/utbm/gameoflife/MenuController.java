@@ -31,6 +31,8 @@ import org.utbm.gameoflife.datafx.ExtendedAnimatedFlowContainer;
 @FXMLController(value = "/fxml/menu.fxml", title = "Material Design Example")
 public final class MenuController {
 
+    
+
     @FXMLViewFlowContext
     private ViewFlowContext context;
 
@@ -126,5 +128,21 @@ public final class MenuController {
                 Platform.exit();
             }
         }
+    }
+
+    static void MenuGameType() {
+        Flow innerFlow = new Flow(GametypeController.class);
+       //final FlowHandler flowHandler = innerFlow.createHandler(context);
+       
+       //context.register("ContentFlow", innerFlow);
+       //context.register("ContentFlowHandler", flowHandler);
+//       final Duration containerAnimationDuration = Duration.millis(320);
+//        try {
+//            drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, SWIPE_LEFT)));
+//        }
+//        catch (FlowException ex) {
+//            Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+//        }
+//       context.register("ContentPane", drawer.getContent().get(0));
     }
 }

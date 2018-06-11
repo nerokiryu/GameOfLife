@@ -42,16 +42,17 @@ public class LoadingController {
                         context.register("ContentFlowHandler", flowHandler);
                         context.register("ContentFlow", innerFlow);
                         final Duration containerAnimationDuration = Duration.millis(320);
-                {
+                //{
                     try {
                         drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, SWIPE_LEFT)));
                     }
                     catch (FlowException ex) {
                         Logger.getLogger(LoadingController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                }
+                //}
                         context.register("ContentPane", drawer.getContent().get(0));
                     break;                
+                  
                   default:
                     /*Action*/;             
                 }

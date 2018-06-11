@@ -40,7 +40,9 @@ public class ButtonController {
 
     @FXML
     void HandleGameType(ActionEvent event){
-       
+       MenuController.MenuGameType();
+        
+        
     }
     @FXML
     void HandleOptions(ActionEvent event){
