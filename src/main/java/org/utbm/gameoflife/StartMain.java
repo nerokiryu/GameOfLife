@@ -155,9 +155,10 @@ public class StartMain extends Application{
 //        primaryStage.setScene(scene);
 //        primaryStage.show();
         if (args == null || args.length == 0){
-        testAffichage(primaryStage);
+            testAffichage(primaryStage);
         }else{
-        construireSceneJeu(primaryStage);
+            
+            construireSceneJeu(primaryStage);
         }
     }
     

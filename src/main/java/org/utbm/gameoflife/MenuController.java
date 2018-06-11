@@ -75,6 +75,17 @@ public final class MenuController {
         drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, SWIPE_LEFT)));
         context.register("ContentPane", drawer.getContent().get(0));
     }
+    static void  GoOptions() throws FlowException{
+                // set the default controller
+        Flow innerFlow = new Flow(OptionsController.class);
+
+        final FlowHandler flowHandler = innerFlow.createHandler(context);
+        context.register("ContentFlowHandler", flowHandler);
+        context.register("ContentFlow", innerFlow);
+        final Duration containerAnimationDuration = Duration.millis(320);
+        drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, SWIPE_LEFT)));
+        context.register("ContentPane", drawer.getContent().get(0));
+    }
     
     static void Loading()throws FlowException{
        Flow innerFlow = new Flow(LoadingController.class);
