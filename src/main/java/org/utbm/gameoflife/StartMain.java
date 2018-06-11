@@ -128,7 +128,7 @@ public class StartMain extends Application{
     public void start(Stage primaryStage) throws Exception {
         
         instance = new StartMain();
-        System.out.println("staaaaaaaaaaaaaaaaaaart");
+        //System.out.println("staaaaaaaaaaaaaaaaaaart");
         Screen ecran = Screen.getPrimary();
      
         javafx.geometry.Rectangle2D limitesEcran = ecran.getVisualBounds();

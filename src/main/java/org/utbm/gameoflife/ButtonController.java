@@ -43,8 +43,10 @@ public class ButtonController {
     }
 
     @FXML
-    void HandleGameType(ActionEvent event){
-       
+    void HandleGameType(ActionEvent event) throws Exception{
+       MenuController.GoMenuGameType();
+        
+        
     }
     
     @FXML

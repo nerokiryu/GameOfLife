@@ -19,7 +19,7 @@ public class FourmiLangton {
      * @param posfourmiold
      * @param circles
      */
-    
+    //récupération de la fourmi
     public static void evoluerMatrice(Grid2D grid, Position posfourmi, Position posfourmiold, Circle[][] circles){
         
         evoluerCellule(grid,posfourmi,posfourmiold, circles, directionfourmi(posfourmi, posfourmiold));
@@ -36,6 +36,7 @@ public class FourmiLangton {
      * @param dir
      *
      */
+    // déplacement de la fourmi
     public static void evoluerCellule(Grid2D grid, Position posfourmi,Position posfourmiold, Circle[][] circles, int dir)
     {
         if(grid.getCell(posfourmi.getPosX(), posfourmi.getPosY()).getEtat()==Couleur.noir.ordinal()){ //si la cellule est noir on va a gauche en fonction de la direction actuel
@@ -45,19 +46,15 @@ public class FourmiLangton {
             posfourmiold.setPosY(posfourmi.getPosY());
             switch(dir){
                 case 0: // a gauche a gauche
-                    //grid.getCell(x, y+1).setEtat(Couleur.rouge.ordinal());
                     posfourmi.setPosY(posfourmi.getPosY()+1);
                     break;
                 case 1: // en haut a gauche
-                    //grid.getCell(x-1, y).setEtat(Couleur.rouge.ordinal());
                     posfourmi.setPosX(posfourmi.getPosX()-1);
                     break;
                 case 2: // a droite a gauche
-                    //grid.getCell(x, y-1).setEtat(Couleur.rouge.ordinal());
                     posfourmi.setPosY(posfourmi.getPosY()-1);
                     break;
                 case 3: // en bas a gauche
-                    //grid.getCell(x+1, y).setEtat(Couleur.rouge.ordinal());
                     posfourmi.setPosX(posfourmi.getPosX()+1);
                     break;
             }
@@ -69,47 +66,22 @@ public class FourmiLangton {
             posfourmiold.setPosY(posfourmi.getPosY());
             switch(dir){
                 case 0: // a gauche a droite
-                    //grid.getCell(x, y-1).setEtat(Couleur.rouge.ordinal());
                     posfourmi.setPosY(posfourmi.getPosY()-1);
                     break;
                 case 1: // en haut a droite
-                    //grid.getCell(x+1, y).setEtat(Couleur.rouge.ordinal());
                     posfourmi.setPosX(posfourmi.getPosX()+1);
                     break;
                 case 2: // a droite a droite
-                    //grid.getCell(x, y+1).setEtat(Couleur.rouge.ordinal());
                     posfourmi.setPosY(posfourmi.getPosY()+1);
                     break;
                 case 3: // en bas a droite
-                    //grid.getCell(x-1, y).setEtat(Couleur.rouge.ordinal());
+                    
                     posfourmi.setPosX(posfourmi.getPosX()-1);
                     break;
             }
         }
         else{
-//            grid.getCell(x, y).setEtat(Couleur.blanc.ordinal());
-//            switch(dir){
-//                case 0: // a gauche a gauche
-//                    grid.getCell(x, y+1).setEtat(Couleur.rouge.ordinal());
-//                    break;
-//                case 1: // en haut a gauche
-//                    grid.getCell(x-1, y).setEtat(Couleur.rouge.ordinal());
-//                    break;
-//                case 2: // a droite a gauche
-//                    grid.getCell(x, y-1).setEtat(Couleur.rouge.ordinal());
-//                    break;
-//                case 3: // en bas a gauche
-//                    grid.getCell(x+1, y).setEtat(Couleur.rouge.ordinal());
-//                    break;
-//            }
         }
-        
-        
-        
-//        circles[x+1][y].setFill(Couleur.getValeurByInt(grid.getCell(x+1, y).getEtat()));
-//        circles[x-1][y].setFill(Couleur.getValeurByInt(grid.getCell(x-1, y).getEtat()));
-//        circles[x][y+1].setFill(Couleur.getValeurByInt(grid.getCell(x, y+1).getEtat()));
-//        circles[x][y-1].setFill(Couleur.getValeurByInt(grid.getCell(x, y-1).getEtat()));
     }
     
     
@@ -118,9 +90,9 @@ public class FourmiLangton {
         for(int i=0; i<tailleX; i++)
             for(int j=0; j<tailleY; j++)
                 grid.getCell(i, j).setEtat(Couleur.noir.ordinal());
-        //grid.getCell(tailleX/2, tailleY/2).setEtat(Couleur.rouge.ordinal());
     }
     
+    //on cherche la direction de la fourmi
     public static int directionfourmi(Position posfourmi, Position posfourmiold){
         if(posfourmi.getPosX()<posfourmiold.getPosX() && posfourmi.getPosY() == posfourmiold.getPosY()){
             return 0;//a gauche
