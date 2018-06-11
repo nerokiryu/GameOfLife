@@ -6,6 +6,7 @@
 package org.utbm.gameoflife;
 
 import com.jfoenix.controls.JFXDecorator;
+import com.jfoenix.controls.JFXDrawer;
 import com.jfoenix.svg.SVGGlyph;
 import com.jfoenix.svg.SVGGlyphLoader;
 import io.datafx.controller.flow.Flow;
@@ -45,20 +46,21 @@ public class StartMain extends Application{
     /**taille d'une cellule en pixel*/
     int sizeCell = 10;
     /**longueur de la matrice (en nombre de cellules sur une rangée)*/
-    private int nbColonnesCellules,nbLignesCellules;
+    public int nbColonnesCellules,nbLignesCellules;
     /**densite de cellules actives au départ*/
     double densite;
     /**nb de cycles d'execution**/
     int nbCycle = Timeline.INDEFINITE;
+    private static String[] args ;
     String typeJeu;
     /**délai en ms entre chaque évolution*/
-    private int tempo;
-    private static Stage primaryStage;
+    int tempo;
+    static Stage primaryStage;
     @FXMLViewFlowContext
     private ViewFlowContext flowContext;
     
     private static StartMain instance=null;
-    private static Object objetSynchrone__;
+
 
     public StartMain() {
     
@@ -101,7 +103,7 @@ public class StartMain extends Application{
         decorator.setCustomMaximize(true);
         decorator.setGraphic(new SVGGlyph(""));
         
-        primaryStage.setTitle("JFoenix Demo");
+        primaryStage.setTitle("Game of life");
 
         double width = 800;
         double height = 600;
@@ -136,7 +138,7 @@ public class StartMain extends Application{
 
         // Initialisation de variables fondamentales
         nbColonnesCellules=nbLignesCellules=40;
-        tempo = 600;
+        tempo = 60;
         sizeCell = calculerTailleCellulesSelonTailleEcran (limitesEcran,200,nbColonnesCellules,nbLignesCellules);
         densite = 0.5;
         //snbCycle = 50;
@@ -151,10 +153,11 @@ public class StartMain extends Application{
 //        primaryStage.setTitle("JavaFX and Maven");
 //        primaryStage.setScene(scene);
 //        primaryStage.show();
-        
+        if (args == null || args.length == 0){
         testAffichage(primaryStage);
-        //construireSceneJeu(primaryStage);
-        
+        }else{
+        construireSceneJeu(primaryStage);
+        }
     }
     
     int calculerTailleCellulesSelonTailleEcran (javafx.geometry.Rectangle2D limitesEcran,int LargeurZoneBoutons,int nbColonnesCellules,int nbLignesCellules)
@@ -175,7 +178,9 @@ public class StartMain extends Application{
         return tailleMax ;
     }
     
-    void construireSceneJeu()
+
+    
+    void construireSceneJeu(Stage primaryStage)
     {
         System.out.println("youpi");
         int largeur = (nbColonnesCellules+1) * (sizeCell+1);
@@ -190,7 +195,7 @@ public class StartMain extends Application{
         root.getChildren().add(conteneurAutomate);
         //definir la scene principale
         Scene scene = new Scene(root, largeur, hauteur, Color.BLACK);
-        primaryStage.setTitle("Jeux");
+        
         primaryStage.setScene(scene);
         //creation et initialisation des cellules
         grid = new Grid2D(nbColonnesCellules,nbLignesCellules);
@@ -279,6 +284,8 @@ public class StartMain extends Application{
      * @param args argument de lancement du programme
      */
     public static void main(String[] args) {
+        StartMain.args = args;
         launch(args);
+        
     }
 }

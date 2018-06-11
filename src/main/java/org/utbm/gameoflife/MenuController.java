@@ -53,9 +53,12 @@ public final class MenuController {
    @FXML
     void HandleBackMenu(ActionEvent event) throws Exception{
         Loading();
-        //LoadingController.Next("menu", context, drawer);
+        
+        LoadingController.Next("menu", context, drawer);
+
 
     }
+    
     
     void Loading()throws FlowException{
        Flow innerFlow = new Flow(LoadingController.class);

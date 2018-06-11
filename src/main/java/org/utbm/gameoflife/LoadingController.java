@@ -9,6 +9,8 @@ import io.datafx.controller.flow.FlowException;
 import io.datafx.controller.flow.FlowHandler;
 import static io.datafx.controller.flow.container.ContainerAnimations.SWIPE_LEFT;
 import io.datafx.controller.flow.context.ViewFlowContext;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javafx.animation.Transition;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -29,24 +31,34 @@ public class LoadingController {
     }
 
     public static void Next(String nextPage,ViewFlowContext context, JFXDrawer drawer) throws Exception{
-        
-        
-        
-        switch (nextPage)
-            {
-              case "menu":
-                    Flow innerFlow = new Flow(ButtonController.class);
+        System.out.print("eazezae");
 
-                    final FlowHandler flowHandler = innerFlow.createHandler(context);
-                    context.register("ContentFlowHandler", flowHandler);
-                    context.register("ContentFlow", innerFlow);
-                    final Duration containerAnimationDuration = Duration.millis(320);
-                    drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, SWIPE_LEFT)));
-                    context.register("ContentPane", drawer.getContent().get(0));
-                break;        
-              default:
-                /*Action*/;             
+                switch (nextPage)
+                {
+                  case "menu":
+                        Flow innerFlow = new Flow(ButtonController.class);
+
+                        final FlowHandler flowHandler = innerFlow.createHandler(context);
+                        context.register("ContentFlowHandler", flowHandler);
+                        context.register("ContentFlow", innerFlow);
+                        final Duration containerAnimationDuration = Duration.millis(320);
+                {
+                    try {
+                        drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, SWIPE_LEFT)));
+                    }
+                    catch (FlowException ex) {
+                        Logger.getLogger(LoadingController.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                }
+                        context.register("ContentPane", drawer.getContent().get(0));
+                    break;                
+                  default:
+                    /*Action*/;             
+                }
             }
-    }
+
+        
+        
+    
     
 }
