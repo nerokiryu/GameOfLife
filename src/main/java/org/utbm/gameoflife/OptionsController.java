@@ -11,6 +11,7 @@ import com.jfoenix.controls.JFXTextField;
 import io.datafx.controller.FXMLController;
 import java.net.URL;
 import java.util.ResourceBundle;
+import javafx.animation.Timeline;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
@@ -45,7 +46,11 @@ public class OptionsController{
         double lengthv=length.getValue();
         double heightv=height.getValue();
         double speedv=speed.getValue();
-        int nbcyclev=Integer.parseInt(nbcycle.getText());
+        int nbcyclev;
+        if(Integer.parseInt(nbcycle.getText())>0)
+        nbcyclev=Integer.parseInt(nbcycle.getText());
+        else
+        nbcyclev=Timeline.INDEFINITE;
         StartMain.getInstance().densite=((101-(int)densv)/100);
         StartMain.getInstance().nbColonnesCellules=((int)lengthv);
         StartMain.getInstance().nbLignesCellules=((int)heightv);
