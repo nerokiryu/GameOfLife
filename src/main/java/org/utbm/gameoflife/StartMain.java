@@ -154,10 +154,29 @@ public class StartMain extends Application{
 //        primaryStage.setTitle("JavaFX and Maven");
 //        primaryStage.setScene(scene);
 //        primaryStage.show();
-        if (args == null || args.length == 0){
+        if (args == null || args.length < 8){
             testAffichage(primaryStage);
         }else{
             
+            
+            if(args[0]!="")        
+            densite=Double.parseDouble(args[0]);
+            if(args[1]!="")
+            nbCycle=Integer.parseInt(args[1]);
+            if(args[2]!="")
+            tempo=Integer.parseInt(args[2]);
+            if(args[3]!="")
+            nbColonnesCellules=Integer.parseInt(args[3]);
+            if(args[4]!="")
+            nbLignesCellules=Integer.parseInt(args[4]);
+            if(args[5]!="")
+            JeuDeLaVie.setNbminsolitude(Integer.parseInt(args[5]));
+            if(args[6]!="")
+            JeuDeLaVie.setNbmaxsurpopulation(Integer.parseInt(args[6]));
+            if(args[7]!="")
+            JeuDeLaVie.setNbminreproduction(Integer.parseInt(args[7]));
+            if(args[8]!="")
+            JeuDeLaVie.setNbmaxreproduction(Integer.parseInt(args[8]));
             construireSceneJeu(primaryStage);
         }
     }

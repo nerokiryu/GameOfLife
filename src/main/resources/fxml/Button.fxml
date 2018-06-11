@@ -25,6 +25,10 @@
             <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="OPTIONS" onAction="#HandleOptions"
                        style="-fx-text-fill:WHITE;-fx-background-color:#5264AE;-fx-font-size:30px;"/>
         </HBox>
+        <HBox spacing="40" style="-fx-padding: 0 0 0 100;">
+            <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="EXIT" onAction="#HandleExit"
+                       style="-fx-text-fill:WHITE;-fx-background-color:#5264AE;-fx-font-size:30px;"/>
+        </HBox>
         
     </VBox>
 </StackPane>
