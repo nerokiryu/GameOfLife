@@ -47,7 +47,7 @@ public class OptionsController{
         double heightv=height.getValue();
         double speedv=speed.getValue();
         int nbcyclev;
-        if(Integer.parseInt(nbcycle.getText())>0)
+        if(nbcycle.getText()!= "" && Integer.parseInt(nbcycle.getText())>0)
         nbcyclev=Integer.parseInt(nbcycle.getText());
         else
         nbcyclev=Timeline.INDEFINITE;
