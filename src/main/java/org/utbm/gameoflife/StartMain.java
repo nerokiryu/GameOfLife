@@ -51,6 +51,7 @@ public class StartMain extends Application{
     double densite;
     /**nb de cycles d'execution**/
     int nbCycle = Timeline.INDEFINITE;
+    /**liste des arguments **/
     private static String[] args ;
     String typeJeu;
     /**délai en ms entre chaque évolution*/

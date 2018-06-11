@@ -2,6 +2,7 @@ package org.utbm.gameoflife;
 
 import com.jfoenix.controls.JFXButton;
 import io.datafx.controller.FXMLController;
+import io.datafx.controller.flow.FlowException;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,6 +29,8 @@ public class ButtonController {
     
     @FXML
     void HandleStart(ActionEvent event){
+        
+        //run in a new window the game
         Runtime runTime = Runtime.getRuntime();
         try {
             System.out.println("open");
@@ -43,12 +46,8 @@ public class ButtonController {
        
     }
     @FXML
-    void HandleOptions(ActionEvent event){
-       
-    }
-    @FXML
-    void HandleEditor(ActionEvent event){
-       
+    void HandleEditor(ActionEvent event) throws FlowException{
+       MenuController.GoEditor();
     }
     
 }
