@@ -15,6 +15,7 @@ import io.datafx.controller.flow.container.DefaultFlowContainer;
 import io.datafx.controller.flow.context.FXMLViewFlowContext;
 import io.datafx.controller.flow.context.ViewFlowContext;
 import java.io.IOException;
+import java.io.PrintWriter;
 import static java.lang.Math.min;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -154,29 +155,34 @@ public class StartMain extends Application{
 //        primaryStage.setTitle("JavaFX and Maven");
 //        primaryStage.setScene(scene);
 //        primaryStage.show();
-        if (args == null || args.length < 8){
+        if (args == null || args.length < 9){
             testAffichage(primaryStage);
         }else{
             
-            
-            if(args[0]!="")        
+              PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
+              for(int i=0;i<args.length;i++)
+              writer.println(i+" "+args[i]);
+              writer.close();
+            if(!"0.0".equals(args[0]))        
             densite=Double.parseDouble(args[0]);
-            if(args[1]!="")
+            if(!"-1".equals(args[1]))
             nbCycle=Integer.parseInt(args[1]);
-            if(args[2]!="")
+            if(!"0".equals(args[2]))
             tempo=Integer.parseInt(args[2]);
-            if(args[3]!="")
+            if(!"0".equals(args[3]))
             nbColonnesCellules=Integer.parseInt(args[3]);
-            if(args[4]!="")
+            if(!"0".equals(args[4]))
             nbLignesCellules=Integer.parseInt(args[4]);
-            if(args[5]!="")
+            if(!"2".equals(args[5]))
             JeuDeLaVie.setNbminsolitude(Integer.parseInt(args[5]));
-            if(args[6]!="")
+            if(!"3".equals(args[6]))
             JeuDeLaVie.setNbmaxsurpopulation(Integer.parseInt(args[6]));
-            if(args[7]!="")
+            if(!"3".equals(args[7]))
             JeuDeLaVie.setNbminreproduction(Integer.parseInt(args[7]));
-            if(args[8]!="")
+            if(!"3".equals(args[8]))
             JeuDeLaVie.setNbmaxreproduction(Integer.parseInt(args[8]));
+            //if(!"3".equals(args[9]))
+            //typeJeu=args[9];
             construireSceneJeu(primaryStage);
         }
     }
