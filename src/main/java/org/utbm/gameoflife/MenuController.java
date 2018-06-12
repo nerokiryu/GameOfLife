@@ -147,10 +147,13 @@ public final class MenuController {
         // close application
         @FXML
         private void submit() {
+            //react to click on the popup
             if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 1) {
+                // close application
                 Platform.exit();
             }
             if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 0) {
+                //open a web browser directing to our repository
                 String url = "https://github.com/nerokiryu/GameOfLife";
                 try {
                     java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
