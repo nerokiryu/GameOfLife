@@ -23,6 +23,7 @@ import javafx.util.Duration;
 import javax.annotation.PostConstruct;
 
 import static io.datafx.controller.flow.container.ContainerAnimations.SWIPE_LEFT;
+import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javafx.event.ActionEvent;
@@ -148,6 +149,15 @@ public final class MenuController {
         private void submit() {
             if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 1) {
                 Platform.exit();
+            }
+            if (toolbarPopupList.getSelectionModel().getSelectedIndex() == 0) {
+                String url = "https://github.com/nerokiryu/GameOfLife";
+                try {
+                    java.awt.Desktop.getDesktop().browse(java.net.URI.create(url));
+                }
+                catch (IOException ex) {
+                    Logger.getLogger(MenuController.class.getName()).log(Level.SEVERE, null, ex);
+                }
             }
         }
     }
