@@ -15,13 +15,7 @@
         <children>
             <Label styleClass="title-label">Density</Label><JFXSlider id="dens" styleClass="jfx-slider-style" maxWidth="300" max="100" ></JFXSlider>
             <Label styleClass="title-label">Speed</Label><JFXSlider id="speed" styleClass="jfx-slider-style" maxWidth="300" min="1" max="100"></JFXSlider>
-            <JFXTextField id="nbcycle" promptText="number of cycle">
-                <validators>
-                    <RequiredFieldValidator message="Input Required!">
-                        <FontAwesomeIconView glyphName="WARNING" style="-fx-font-family: FontAwesome;"/>
-                    </RequiredFieldValidator>
-                </validators>
-            </JFXTextField>
+            <Label styleClass="title-label">Number of cycle</Label><JFXTextField id="nbcycle" promptText="number of cycle"></JFXTextField>
             <Label styleClass="title-label">Length of the grid</Label><JFXSlider id="length" styleClass="jfx-slider-style" maxWidth="300" min="1" max="150"></JFXSlider>
             <Label styleClass="title-label">Height of the grid</Label><JFXSlider id="height" styleClass="jfx-slider-style" maxWidth="300" min="1" max="150"></JFXSlider>
             <JFXButton prefWidth="400" prefHeight="100" buttonType="RAISED" text="Submit" onAction="#HandleSubmit"

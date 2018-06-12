@@ -47,16 +47,16 @@ public class StartMain extends Application{
     /**taille d'une cellule en pixel*/
     int sizeCell = 10;
     /**longueur de la matrice (en nombre de cellules sur une rangée)*/
-    public int nbColonnesCellules,nbLignesCellules;
+    public int nbColonnesCellules = 40,nbLignesCellules = 40;
     /**densite de cellules actives au départ*/
-    double densite;
+    double densite = 0.5;
     /**nb de cycles d'execution**/
     int nbCycle = Timeline.INDEFINITE;
     /**liste des arguments **/
     private static String[] args ;
-    String typeJeu;
+    String typeJeu = "JeuDeLaVie";
     /**délai en ms entre chaque évolution*/
-    int tempo;
+    int tempo = 60;
     /**la fenetre principale**/
     static Stage primaryStage;
     /** le contenue de la fentre**/
@@ -154,19 +154,13 @@ public class StartMain extends Application{
         primaryStage.setWidth(limitesEcran.getWidth());
         primaryStage.setHeight(limitesEcran.getHeight());
 
-        // Initialisation de variables fondamentales
-        nbColonnesCellules=nbLignesCellules=40;
-        tempo = 60;
-        sizeCell = calculerTailleCellulesSelonTailleEcran (limitesEcran,200,nbColonnesCellules,nbLignesCellules);
-        densite = 0.5;
-        typeJeu = "JeuDeLaVie";
-
         
+      
         if (args == null || args.length < 9){
             //sans parametre affiche le menu
             AffichageMenu(primaryStage);
         }else{
-            // affiche le jeu avec les parametres
+            // set les parametres
             if(!"0.0".equals(args[0]))        
             densite=Double.parseDouble(args[0]);
             if(!"-1".equals(args[1]))
@@ -187,6 +181,9 @@ public class StartMain extends Application{
             JeuDeLaVie.setNbmaxreproduction(Integer.parseInt(args[8]));
             if(!"JeuDeLaVie".equals(args[9]))
                 typeJeu=args[9];
+            //modifie la taille des cellules
+            this.sizeCell = calculerTailleCellulesSelonTailleEcran (limitesEcran,200,nbColonnesCellules,nbLignesCellules);
+            //lance le jeu
             construireSceneJeu(primaryStage);
         }
     }

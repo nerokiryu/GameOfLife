@@ -50,7 +50,7 @@ public class OptionsController{
         length.setValue( StartMain.getInstance().nbColonnesCellules);
         height.setValue(StartMain.getInstance().nbLignesCellules);
         speed.setValue(StartMain.getInstance().tempo);
-
+        nbcycle.setText(""+StartMain.getInstance().nbCycle);
     }
 
 
@@ -63,7 +63,7 @@ public class OptionsController{
         double heightv=height.getValue();
         double speedv=speed.getValue();
         int nbcyclev;
-        if(!"".equals(nbcycle.getText()) && Integer.parseInt(nbcycle.getText())>0)
+        if(!"".equals(nbcycle.getText()) && Integer.parseInt(nbcycle.getText())>=0)
         nbcyclev=Integer.parseInt(nbcycle.getText());
         else
         nbcyclev=Timeline.INDEFINITE;
