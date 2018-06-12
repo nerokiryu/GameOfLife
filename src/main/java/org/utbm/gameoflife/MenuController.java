@@ -37,11 +37,10 @@ public final class MenuController {
     private static ViewFlowContext context;
 
     @FXML
-    private StackPane root;
-
+    private  StackPane root;
 
     @FXML
-    private JFXHamburger titleBurger;
+    private static JFXButton button;
 
     @FXML
     private StackPane optionsBurger;
@@ -54,12 +53,14 @@ public final class MenuController {
     
    @FXML
     void HandleBackMenu(ActionEvent event) throws Exception{
-        Loading();  
-        LoadingController.Next("menu", context, drawer);
-
+        //handle button action
+        BackMenu();
+        
 
     }
     static void BackMenu() throws Exception{
+        //return to menu
+        button.setVisible(false);
         Loading();  
         LoadingController.Next("menu", context, drawer);
 
@@ -67,7 +68,8 @@ public final class MenuController {
     }
     
     static void  GoEditor() throws FlowException{
-                // set the default controller
+        // display editor panel
+        button.setVisible(true);
         Flow innerFlow = new Flow(EditorController.class);
 
         final FlowHandler flowHandler = innerFlow.createHandler(context);
@@ -78,7 +80,8 @@ public final class MenuController {
         context.register("ContentPane", drawer.getContent().get(0));
     }
     static void  GoOptions() throws FlowException{
-                // set the default controller
+        // display options panel
+        button.setVisible(true);
         Flow innerFlow = new Flow(OptionsController.class);
 
         final FlowHandler flowHandler = innerFlow.createHandler(context);
@@ -90,6 +93,7 @@ public final class MenuController {
     }
     
     static void Loading()throws FlowException{
+       // display loading panel
        Flow innerFlow = new Flow(LoadingController.class);
        final FlowHandler flowHandler = innerFlow.createHandler(context);
        context.register("ContentFlow", innerFlow);
@@ -108,17 +112,8 @@ public final class MenuController {
      */
     @PostConstruct
     public void init() throws Exception {
-        // init the title hamburger icon
-        drawer.setOnDrawerOpening(e -> {
-            final Transition animation = titleBurger.getAnimation();
-            animation.setRate(1);
-            animation.play();
-        });
-        drawer.setOnDrawerClosing(e -> {
-            final Transition animation = titleBurger.getAnimation();
-            animation.setRate(-1);
-            animation.play();
-        });
+        // build the main screen
+        button.setVisible(false);
 
         FXMLLoader loader = new FXMLLoader(getClass().getResource("/fxml/MainPopup.fxml"));
         loader.setController(new InputController());
@@ -158,7 +153,8 @@ public final class MenuController {
     }
 
     static void GoMenuGameType()throws Exception {
-           // set the default controller
+        // display menu game type panel
+        button.setVisible(true);
         Flow innerFlow = new Flow(GametypeController.class);
 
         final FlowHandler flowHandler = innerFlow.createHandler(context);

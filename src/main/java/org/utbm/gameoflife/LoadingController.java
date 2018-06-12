@@ -23,16 +23,10 @@ import org.utbm.gameoflife.datafx.ExtendedAnimatedFlowContainer;
 @FXMLController(value = "/fxml/loading.fxml", title = "")
 public class LoadingController {
     
-        @PostConstruct
-    public void init() throws Exception {
-        
-        
-
-    }
 
     public static void Next(String nextPage,ViewFlowContext context, JFXDrawer drawer) throws Exception{
-        System.out.print("eazezae");
-
+        
+                //select next page with loading screen
                 switch (nextPage)
                 {
                   case "menu":
@@ -42,14 +36,12 @@ public class LoadingController {
                         context.register("ContentFlowHandler", flowHandler);
                         context.register("ContentFlow", innerFlow);
                         final Duration containerAnimationDuration = Duration.millis(320);
-                //{
                     try {
                         drawer.setContent(flowHandler.start(new ExtendedAnimatedFlowContainer(containerAnimationDuration, SWIPE_LEFT)));
                     }
                     catch (FlowException ex) {
                         Logger.getLogger(LoadingController.class.getName()).log(Level.SEVERE, null, ex);
                     }
-                //}
                         context.register("ContentPane", drawer.getContent().get(0));
                     break;                
                   

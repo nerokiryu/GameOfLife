@@ -14,6 +14,7 @@ import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import java.util.regex.*;
+import javax.annotation.PostConstruct;
 
 /**
  * FXML Controller class
@@ -28,10 +29,24 @@ public class GametypeController {
     
     @FXML
     private JFXButton submit;
-   
+    
+      @PostConstruct
+    public void init() throws Exception {
+ 
+        //init each element of this window
+        if(!"".equals(StartMain.getInstance().typeJeu) && "JeuDeLaVie".equals(StartMain.getInstance().typeJeu))
+            jfxComboBox.setValue(jfxComboBox.getItems().get(0));
+        else if(!"".equals(StartMain.getInstance().typeJeu) && "feuforet".equals(StartMain.getInstance().typeJeu))
+            jfxComboBox.setValue(jfxComboBox.getItems().get(1));
+        else if(!"".equals(StartMain.getInstance().typeJeu) && "fourmi".equals(StartMain.getInstance().typeJeu))
+            jfxComboBox.setValue(jfxComboBox.getItems().get(2));
+
+        
+    }
     
     @FXML
     void HandleSubmit(ActionEvent event) throws Exception{
+        //set each value in the main program
         Pattern vie,feux,langton;
         Matcher mvie,mfeux,mlangton;
         

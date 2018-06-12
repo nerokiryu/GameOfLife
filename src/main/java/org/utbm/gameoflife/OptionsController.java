@@ -44,8 +44,8 @@ public class OptionsController{
      */
     @PostConstruct
     public void init() throws Exception {
+        //init each element of this window
         int densite = (int) (StartMain.getInstance().densite*100);
-        System.out.println(StartMain.getInstance().densite);
         dens.setValue(densite);
         length.setValue( StartMain.getInstance().nbColonnesCellules);
         height.setValue(StartMain.getInstance().nbLignesCellules);
@@ -57,6 +57,7 @@ public class OptionsController{
 
    @FXML
     void HandleSubmit(ActionEvent event) throws Exception{
+        //set each value in the main program
         double densv=dens.getValue();
         double lengthv=length.getValue();
         double heightv=height.getValue();

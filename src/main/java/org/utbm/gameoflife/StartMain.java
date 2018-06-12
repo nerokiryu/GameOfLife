@@ -57,10 +57,12 @@ public class StartMain extends Application{
     String typeJeu;
     /**délai en ms entre chaque évolution*/
     int tempo;
+    /**la fenetre principale**/
     static Stage primaryStage;
+    /** le contenue de la fentre**/
     @FXMLViewFlowContext
     private ViewFlowContext flowContext;
-    
+    /** instance du singleton**/
     private static StartMain instance=null;
 
 
@@ -68,6 +70,10 @@ public class StartMain extends Application{
     
     }
     
+    /**
+     * retourne l'instance
+     * @return instance
+     */
     public static StartMain getInstance() {
         if (null == instance) { // Premier appel
             instance = new StartMain();
@@ -75,12 +81,21 @@ public class StartMain extends Application{
         return instance;
     }
     
+    /**
+     * retourne la fenetre principale
+     * @return primaryStage
+     */
     public static Stage getPrimaryStage() {
         return primaryStage;
     }
     
-    public void testAffichage(Stage stage)    {
+    /**
+     * affiche le menu
+     * @param stage
+     */
+    public void AffichageMenu(Stage stage)    {
     primaryStage = stage;
+    // crée le thread principale
         new Thread(() -> {
             try {
                 SVGGlyphLoader.loadGlyphsFont(StartMain.class.getResourceAsStream("/fonts/icomoon.svg"),
@@ -89,7 +104,7 @@ public class StartMain extends Application{
                 ioExc.printStackTrace();
             }
         }).start();
-
+        //initialise le menu
         Flow flow = new Flow(MenuController.class);
         DefaultFlowContainer container = new DefaultFlowContainer();
         flowContext = new ViewFlowContext();
@@ -100,37 +115,38 @@ public class StartMain extends Application{
         catch (FlowException ex) {
             Logger.getLogger(StartMain.class.getName()).log(Level.SEVERE, null, ex);
         }
-
+        // prépare les décorateurs
         JFXDecorator decorator = new JFXDecorator(primaryStage, container.getView());
         decorator.setCustomMaximize(true);
         decorator.setGraphic(new SVGGlyph(""));
-        
+        //met le titre à la fenetre
         primaryStage.setTitle("Game of life");
-
+        //valeur par défaut
         double width = 800;
         double height = 600;
+        //met en pleine écran le menu
         try {
             Rectangle2D bounds = Screen.getScreens().get(0).getBounds();
             width = bounds.getWidth() / 2.5;
             height = bounds.getHeight() / 1.35;
         }catch (Exception e){ }
-
+        //met le décorateur et le css en place
         Scene scene = new Scene(decorator, width, height);
         final ObservableList<String> stylesheets = scene.getStylesheets();
         stylesheets.addAll(//StartMain.class.getResource("/styles/jfoenix-fonts.css").toExternalForm(),
                            //StartMain.class.getResource("/styles/jfoenix-design.css").toExternalForm(),
                            StartMain.class.getResource("/styles/menu.css").toExternalForm());
+        //affiche la scene et la fentre
         primaryStage.setScene(scene);
         primaryStage.show();
 }
     
     @Override
     public void start(Stage primaryStage) throws Exception {
-        
+        // créer l'instance
         instance = new StartMain();
-        //System.out.println("staaaaaaaaaaaaaaaaaaart");
         Screen ecran = Screen.getPrimary();
-     
+     // limite l'ecran
         javafx.geometry.Rectangle2D limitesEcran = ecran.getVisualBounds();
         
         primaryStage.setX(limitesEcran.getMinX());
@@ -143,33 +159,20 @@ public class StartMain extends Application{
         tempo = 60;
         sizeCell = calculerTailleCellulesSelonTailleEcran (limitesEcran,200,nbColonnesCellules,nbLignesCellules);
         densite = 0.5;
-        //snbCycle = 50;
         typeJeu = "JeuDeLaVie";
-        //typeJeu = "fourmi";
-        //typeJeu = "feuforet";
+
         
-//        Parent root = FXMLLoader.load(getClass().getResource("/fxml/menu.fxml"));
-//        Scene scene = new Scene(root);
-//        scene.getStylesheets().add("/styles/menu.css");
-//        
-//        primaryStage.setTitle("JavaFX and Maven");
-//        primaryStage.setScene(scene);
-//        primaryStage.show();
         if (args == null || args.length < 9){
-            testAffichage(primaryStage);
+            //sans parametre affiche le menu
+            AffichageMenu(primaryStage);
         }else{
-            
-              PrintWriter writer = new PrintWriter("the-file-name.txt", "UTF-8");
-              for(int i=0;i<args.length;i++)
-              writer.println(i+" "+args[i]);
-              writer.close();
+            // affiche le jeu avec les parametres
             if(!"0.0".equals(args[0]))        
             densite=Double.parseDouble(args[0]);
             if(!"-1".equals(args[1]))
             nbCycle=Integer.parseInt(args[1]);
             if(!"0".equals(args[2]))
             tempo=Integer.parseInt(args[2]);
-
             if(!"0".equals(args[3]))
             nbColonnesCellules=Integer.parseInt(args[3]);
             if(!"0".equals(args[4]))
@@ -275,7 +278,6 @@ public class StartMain extends Application{
                             
                         }
                     
-                    //JeuDeLaVie.evoluerMatrice(nbColonnesCellules, nbLignesCellules, grid, circles);
                     
                 } ));
         //animation en boucle
@@ -297,7 +299,7 @@ public class StartMain extends Application{
                 root.getChildren().add(circles[i][j]);
             }
     }
-    
+    // copie la grille
     void copie(Grid2D grid, Grid2D gridOld)
     {
         for(Cell2D[] cells :grid.getCells())

@@ -57,7 +57,15 @@ public class JeuSimulationFeuForet {
         circles[x][y].setFill(Couleur.getValeurByInt(grid.getCell(x, y).getEtat()));
     }
     
-    //initialisation de la matrice
+
+
+    /**
+     * initialisation de la matrice
+     * @param tailleX
+     * @param tailleY
+     * @param grid
+     * @param densite
+     */
     public static void initMatrice2D(int tailleX, int tailleY, Grid2D grid, double densite)
     {
         for(int i=0; i<tailleX; i++)

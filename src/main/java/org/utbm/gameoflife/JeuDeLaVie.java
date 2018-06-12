@@ -48,6 +48,10 @@ public class JeuDeLaVie {
     
     /**
      *evolution de l'ensemble de la matrice
+     * @param tailleX
+     * @param tailleY
+     * @param grid
+     * @param circles
      */
     public static void evoluerMatrice(int tailleX, int tailleY, Grid2D grid, Circle[][] circles){
         for(int x=0; x<tailleX; x++)
@@ -56,10 +60,10 @@ public class JeuDeLaVie {
     }
     
     /**
-     *
+     * logique de céllule unique
      * @param x coordonnée en x de la céllule
      * @param y coordonnée en y de la céllule
-     * logique de céllule unique
+     * 
      */
     public static void evoluerCellule(int x, int y, Grid2D grid, Circle[][] circles)
     {
@@ -77,9 +81,9 @@ public class JeuDeLaVie {
     }
     
     /**
-     *
+     * initialisation de la matrice
      * @param densite
-     *  initialisation de la matrice
+     *  
      */
     public static void initMatrice2D(int tailleX, int tailleY, Grid2D grid, double densite)
     {

@@ -10,8 +10,11 @@ package org.utbm.gameoflife;
  * @author Nero
  */
 public class Grid2D {
+    //size of the grid in length
     private int sizeX;
+    //size of the grid in height
     private int sizeY;
+    // the grid of cells (matrice of cells)
     private Cell2D[][] cells;
     public Grid2D(int sizeX, int sizeY) {
         this.sizeX = sizeX;
@@ -44,6 +47,7 @@ public class Grid2D {
         this.sizeY = sizeY;
     }
     private void initGrid2D(){
+        //initialize the grid with the state 0 to each cells
         for (int i = 0; i < sizeX; i++)
             for (int j = 0; j < sizeY; j++)
                 cells[i][j] = new Cell2D(0,i,j);
@@ -67,7 +71,6 @@ public class Grid2D {
                     cells[i][j].getVoisins()[6]=cells[i][j-1];
                 if(i+1 < sizeX && j-1< sizeY && i+1 >= 0 && j-1 >= 0 && cells[i+1][j-1] !=null)
                     cells[i][j].getVoisins()[7]=cells[i+1][j-1];
-                
                 
             }
         }

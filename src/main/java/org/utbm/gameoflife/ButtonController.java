@@ -31,10 +31,9 @@ public class ButtonController {
     @FXML
     void HandleStart(ActionEvent event){
         
-        //run in a new window the game
+        //run in a new window the game with parameters
         Runtime runTime = Runtime.getRuntime();
         try {
-            System.out.println("open");
             Process process = runTime.exec("java -jar ~/../target/GameOfLife-1.0-SNAPSHOT.jar "+StartMain.getInstance().densite+" "+StartMain.getInstance().nbCycle+" "+StartMain.getInstance().tempo+" "+StartMain.getInstance().nbColonnesCellules+" "+StartMain.getInstance().nbLignesCellules+" "+JeuDeLaVie.getNbminsolitude()+" "+JeuDeLaVie.getNbmaxsurpopulation()+" "+JeuDeLaVie.getNbminreproduction()+" "+JeuDeLaVie.getNbmaxreproduction()+" "+StartMain.getInstance().typeJeu);
         }
         catch (IOException ex) {
@@ -44,6 +43,7 @@ public class ButtonController {
 
     @FXML
     void HandleGameType(ActionEvent event) throws Exception{
+        //lunch menu game type screen
        MenuController.GoMenuGameType();
         
         
@@ -51,14 +51,18 @@ public class ButtonController {
     
     @FXML
     void HandleOptions(ActionEvent event) throws FlowException{
+        //lunch options screen
        MenuController.GoOptions();
     }    
     @FXML
     void HandleEditor(ActionEvent event) throws FlowException{
+        //lunch editor screen
        MenuController.GoEditor();
     }
     @FXML
     void HandleExit(ActionEvent event) throws FlowException{
+        //exit the screen
+        
        Platform.exit();
     }
 }

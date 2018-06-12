@@ -10,8 +10,11 @@ package org.utbm.gameoflife;
  * @author Nero
  */
 public class Cell2D {
+    //state of the cell
     private int etat = 0;
+    //neighbourg of this cell
     public Cell2D[] voisins;
+    //position on the grid of this cell
     private Position pos;
     Cell2D(int etat){
         setEtat(etat);
@@ -38,6 +41,7 @@ public class Cell2D {
         return voisins;
     }
     public int nbVoisinsEtat(int etat){
+        //get the number of neighbourg with the "etat" state
         int res=0;
         for(Cell2D item : this.getVoisins())
             if(item != null && item.etat == etat)
